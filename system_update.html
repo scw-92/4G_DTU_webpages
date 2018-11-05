@@ -73,37 +73,104 @@
 
         var xhr = new XMLHttpRequest();
 
-        xhr.upload.addEventListener("progress", display_progress, false);
-        xhr.addEventListener("load", uploadComplete, false);
-        xhr.addEventListener("error", uploadFailed, false);
-        xhr.addEventListener("abort", uploadCanceled, false);
+        switch (fd_name) {
+            case "MLO" :
+                xhr.upload.addEventListener("progress", MLO_progress, false);
+                xhr.addEventListener("load", MLO_Complete, false);
+                xhr.addEventListener("error", MLO_Failed, false);
+                xhr.addEventListener("abort", MLO_Canceled, false);
+                break;
+            case "uboot" :
+                xhr.upload.addEventListener("progress", uboot_progress, false);
+                xhr.addEventListener("load", MLO_Complete, false);
+                xhr.addEventListener("error", MLO_Failed, false);
+                xhr.addEventListener("abort", MLO_Canceled, false);
+                break;
+            case "zImage" :
+                xhr.upload.addEventListener("progress", zImage_progress, false);
+                xhr.addEventListener("load", MLO_Complete, false);
+                xhr.addEventListener("error", MLO_Failed, false);
+                xhr.addEventListener("abort", MLO_Canceled, false);
+                break;
+            case "dtb" :
+                xhr.upload.addEventListener("progress", dtb_progress, false);
+                xhr.addEventListener("load", MLO_Complete, false);
+                xhr.addEventListener("error", MLO_Failed, false);
+                xhr.addEventListener("abort", MLO_Canceled, false);
+                break;
+            case "opt" :
+                xhr.upload.addEventListener("progress", opt_progress, false);
+                xhr.addEventListener("load", MLO_Complete, false);
+                xhr.addEventListener("error", MLO_Failed, false);
+                xhr.addEventListener("abort", MLO_Canceled, false);
+                break;
+            default :
+                break;
+        }
 
         xhr.open("POST", "upgrade.php");
         xhr.send(fd);
     }
 
-    function display_progress(evt) {
+    function MLO_progress(evt) {
         if (evt.lengthComputable) {
             var parcentComplete = Math.round(evt.loaded * 100 / evt.total);
-            console.log(parcentComplete);
+            document.getElementById("MLO_percent").innerHTML = parcentComplete.toString() + "%";
         } else {
             console.log("Unable to upload");
         }
     }
 
-    function uploadComplete(evt) {
-        /* This event is raised when the server send back a response */
-        /* document.getElementById("showBack").innerHTML = evt.target.responseText; */
-        console.log(evt.target.responseText);
+    function uboot_progress(evt) {
+        if (evt.lengthComputable) {
+            var parcentComplete = Math.round(evt.loaded * 100 / evt.total);
+            document.getElementById("uboot_percent").innerHTML = parcentComplete.toString() + "%";
+        } else {
+            console.log("Unable to upload");
+        }
     }
 
-    function uploadFailed(evt) {
+    function zImage_progress(evt) {
+        if (evt.lengthComputable) {
+            var parcentComplete = Math.round(evt.loaded * 100 / evt.total);
+            document.getElementById("zImage_percent").innerHTML = parcentComplete.toString() + "%";
+        } else {
+            console.log("Unable to upload");
+        }
+    }
+
+    function dtb_progress(evt) {
+        if (evt.lengthComputable) {
+            var parcentComplete = Math.round(evt.loaded * 100 / evt.total);
+            document.getElementById("dtb_percent").innerHTML = parcentComplete.toString() + "%";
+        } else {
+            console.log("Unable to upload");
+        }
+    }
+
+    function opt_progress(evt) {
+        if (evt.lengthComputable) {
+            var parcentComplete = Math.round(evt.loaded * 100 / evt.total);
+            document.getElementById("opt_percent").innerHTML = parcentComplete.toString() + "%";
+        } else {
+            console.log("Unable to upload");
+        }
+    }
+
+    function MLO_Complete(evt) {
+        /* document.getElementById("showBack").innerHTML = evt.target.responseText; */
+    }
+
+    function MLO_Failed(evt) {
         alert("There was an error attempting to upload the file.");
     }
 
-    function uploadCanceled(evt) {
+    function MLO_Canceled(evt) {
         alert("The upload has been canceled by the user or the browser dropped the connection.");
     }
+
+
+
 
     function MLO_select_fun() {
     }
