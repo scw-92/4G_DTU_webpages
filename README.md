@@ -17,6 +17,7 @@
  ```
 ## 前端串口发送的数据接口
  ```sh
+    注意：本数据接口通过websocket协议发送
     打开串口：
     {'uart_flow_con': 'None', 'uart_number': 'ttyO1', 'uart_set_time': 1000, 'uart_data_send': '', 'uart_check_bit': 0, 'type': 'uart_on', 'uart_stop_bit': 1, 'uart_data_bit': 8, 'uart_baudrate': 115200, 'uart_how_to_send': 'man'}
     
