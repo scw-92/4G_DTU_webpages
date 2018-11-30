@@ -15,3 +15,17 @@
     cp buildroot-pywebsocket-server.parth   buildroot-xxx/package
     cd buildroot-xxx/package   &&   patch -p1 < buildroot-pywebsocket-server.parth
  ```
+## 前端串口发送的数据接口
+ ```sh
+    打开串口：
+    {'uart_flow_con': 'None', 'uart_number': 'ttyO1', 'uart_set_time': 1000, 'uart_data_send': '', 'uart_check_bit': 0, 'type': 'uart_on', 'uart_stop_bit': 1, 'uart_data_bit': 8, 'uart_baudrate': 115200, 'uart_how_to_send': 'man'}
+    
+    关闭串口：
+    {'type': 'uart_off'}
+    
+    数据发送（hello）：
+    {'type': 'uart_send', 'uart_data_send': 'hello', 'uart_set_time': 1000, 'uart_how_to_send': 'man'}
+    
+    数据接收（未使用）：
+    {'type': 'uart_read'}
+ ```
