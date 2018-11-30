@@ -6,4 +6,7 @@
 
 # 串口功能的使用
 ## web_serial.py的使用
-### 移植Python-websocket-server
+ ```sh
+    salfkl
+ ```
+## 移植Python-websocket-server
