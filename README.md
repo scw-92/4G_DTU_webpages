@@ -12,5 +12,6 @@
   ## 移植Python-websocket-server
  ```sh
     buildroot补丁下载：http://note.youdao.com/noteshare?id=335af89ed486fb5a5ab7fa1a370aa671&sub=8DE7CB7BF5874D1F93784C726C18C986
+    cp buildroot-pywebsocket-server.parth   buildroot-xxx/package
     cd buildroot-xxx/package   &&   patch -p1 < buildroot-pywebsocket-server.parth
  ```
