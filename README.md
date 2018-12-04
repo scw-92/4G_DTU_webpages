@@ -19,14 +19,76 @@
  ```sh
     注意：本数据接口通过websocket协议发送
     打开串口：
-    {'uart_flow_con': 'None', 'uart_number': 'ttyO1', 'uart_set_time': 1000, 'uart_data_send': '', 'uart_check_bit': 0, 'type': 'uart_on', 'uart_stop_bit': 1, 'uart_data_bit': 8, 'uart_baudrate': 115200, 'uart_how_to_send': 'man'}
+    { 
+        'uart_flow_con': 'None', 
+        'uart_number': 'ttyO1', 
+        'uart_set_time': 1000, 
+        'uart_data_send': '', 
+        'uart_check_bit': 0, 
+        'type': 'uart_on', 
+        'uart_stop_bit': 1, 
+        'uart_data_bit': 8, 
+        'uart_baudrate': 115200, 
+        'uart_how_to_send': 'man'
+    }
     
     关闭串口：
-    {'type': 'uart_off'}
+    {
+        'type': 'uart_off'
+    }
     
     数据发送（hello）：
-    {'type': 'uart_send', 'uart_data_send': 'hello', 'uart_set_time': 1000, 'uart_how_to_send': 'man'}
+    {
+        'type': 'uart_send', 
+        'uart_data_send': 'hello', 
+        'uart_set_time': 1000, 
+        'uart_how_to_send': 'man'
+    }
     
     数据接收（未使用）：
-    {'type': 'uart_read'}
+    {
+        'type': 'uart_read'
+    }
  ```
+
+# 网页设置
+## 前端发送给后台的数据接口
+```sh
+  注意：本数据接口通过websocket协议发送
+  get按钮：
+  {
+      'net_name': 'eth0', 
+      'type': 'net_get'
+  }
+  
+  static_set按钮：
+  {
+      'net_name': 'eth0', 
+      'net_dns': '119.29.29.29', 
+      'net_ip': '192.168.4.191', 
+      'net_mac': '00112233', 
+      'net_gate': '192.168.4.1', 
+      'type': 'net_static_set'
+  }
+  
+  dhcpc按钮：
+  {   
+      'net_name': 'eth0',
+      'type': 'net_dhcpc'
+  }
+```
+## 前端接收的后台数据接口
+```sh
+  接收到的数据接口分为两种：
+  1. 连接时的数据接口：包含"connected"的一个字符串
+  
+  2. 数据通信时的数据接口：
+  {
+    "type":"net",
+    "net_name":"eth0",
+    "net_ip":"192.168.4.191",
+    "net_mac":"00112233",
+    "net_gate":"192.168.4.1",
+    "net_dns":"119.29.29.29"
+  }
+```
