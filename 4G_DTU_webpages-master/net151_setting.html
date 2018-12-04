@@ -1,0 +1,276 @@
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="src/css/cmi_at151_net.css">
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+
+<title>网络设置</title>
+</head>
+<body>
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
+	<span class="c-gray en">&gt;</span>
+	网络
+	<span class="c-gray en">&gt;</span>
+	网络设置
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+	<p class="f-20 text-success">Status <span class="f-14">v0.1</span></p>
+        <p>
+            <label>Ethx Setup:</label>&nbsp;&nbsp;
+            <input type="checkbox" name="ethx" value="eht0" id="eth0" onclick="javascript:ethx_select(this)" /> eth0 &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="ethx" value="eth1" id="eth1" onclick="javascript:ethx_select(this)" /> eth1  &nbsp;&nbsp;&nbsp;&nbsp;
+            <br>
+            <br>
+                <table   class="net_table"  id="eth0_table" hidden>
+                    <tr>
+                        <th colspan="4" >ETH0 </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="eth0_ip" >IP: </label>
+                            <input   id="eth0_ip"   ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="eth0_mac" > MAC: </label>
+                            <input id="eth0_mac" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="eth0_gate" >GATE:</label>
+                            <input id="eth0_gate" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="eth0_dns" > DNS :</label>
+                            <input id="eth0_dns" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td  align="left"><input type="button"  id="eth0_button_get"  class="btn btn-success net_button" value="GET"     onclick="javascript:net_get(this)"></input</td>
+                    <td  align="right" ><input type="button"  id="eth0_gutton_set" class="btn btn-success net_button" value="STATIC-SET" onclick="javascript:static_set(this)"></input</td>
+                    <td  align="center" ><input type="button"  id="eth0_button_dhcpc" class="btn btn-success net_button" value="DHCPC" onclick="javascript:dhcpc_set(this)"></input</td>
+                    </tr>
+                </table>
+
+                <table hidden  class="net_table" id="eth1_table">
+                    <tr>
+                        <th colspan="4" >ETH1 </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="eth1_ip">IP: </label>
+                            <input   id="eth1_ip"  ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="eth1_mac"> MAC: </label>
+                            <input  id="eth1_mac" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="eth1_gate">GATE:</label>
+                            <input  id="eth1_gate" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="eth1_dns" > DNS :</label>
+                            <input  id="eth1_dns"  ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td  align="left"><input type="button"  id="eth1_button_get"  class="btn btn-success net_button" value="GET"     onclick="javascript:net_get(this)"></input</td>
+                    <td  align="right" ><input type="button"  id="eth1_gutton_set"  class="btn btn-success net_button" value="STATIC-SET" onclick="javascript:static_set(this)"></input</td>
+                    <td  align="center" ><input type="button"  id="eth1_button_dhcpc"  class="btn btn-success net_button" value="DHCPC" onclick="javascript:dhcpc_set(this)"></input</td>
+                    </tr>
+                </table>
+        </p>
+        
+        
+        <p>
+            <label>Wireless Setup:</label>&nbsp;&nbsp;
+            <input type="radio" name="wireless" value="ra0" id="ra0" onclick="javascript:wireless_select(this)" /> ra0 &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="wireless" value="wlan0" id="wlan0" onclick="javascript:wireless_select(this)" /> wlan0 &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="wireless" value="wwan0" id="wwan0" onclick="javascript:wireless_select(this)" /> wwan0 &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="wireless" value="ppp0" id="ppp0" onclick="javascript:wireless_select(this)" /> ppp0 &nbsp;&nbsp;&nbsp;&nbsp;
+            <br>
+            <br>
+                <table  hidden class="net_table" id="ra0_table">
+                    <tr>
+                        <th colspan="4" >RA0 </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="ra0_ip">IP: </label>
+                            <input   id="ra0_ip"  ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="ra0_mac" > MAC: </label>
+                            <input   id="ra0_mac" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="ra0_gate">GATE:</label>
+                            <input  id="ra0_gate" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="ra0_dns" > DNS :</label>
+                            <input  id="ra0_dns" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td  align="left"><input type="button"  id="ra0_button_get" class="btn btn-success net_button" value="GET"     onclick="javascript:net_get(this)"></input</td>
+                    <td  align="right" ><input type="button"  id="ra0_gutton_set" class="btn btn-success net_button" value="STATIC-SET" onclick="javascript:static_set(this)"></input</td>
+                    <td  align="center" ><input type="button"  id="ra0_button_dhcpc" class="btn btn-success net_button" value="DHCPC" onclick="javascript:dhcpc_set(this)"></input</td>
+                    </tr>
+                </table>
+                <table hidden class="net_table" id="wlan0_table">
+                    <tr>
+                        <th colspan="4" >WLAN0 </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="wlan0_ip" >IP: </label>
+                            <input id="wlan0_ip" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="wlan0_mac"> MAC: </label>
+                            <input  id="wlan0_mac" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="wlan0_gate" >GATE:</label>
+                            <input   id="wlan0_gate" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="wlan0_dns" > DNS :</label>
+                            <input  id="wlan0_dns"  ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td  align="left"><input type="button"  id="wlan0_button_get" class="btn btn-success net_button" value="GET"     onclick="javascript:net_get(this)"></input</td>
+                    <td  align="right" ><input type="button"  id="wlan0_gutton_set" class="btn btn-success net_button" value="STATIC-SET" onclick="javascript:static_set(this)"></input</td>
+                    <td  align="center" ><input type="button"  id="wlan0_button_dhcpc" class="btn btn-success net_button" value="DHCPC" onclick="javascript:dhcpc_set(this)"></input</td>
+                    </tr>
+                </table>
+                <table hidden  class="net_table" id="wwan0_table">
+                    <tr>
+                        <th colspan="4" >WWAN0 </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="wwan0_ip">IP: </label>
+                            <input  id="wwan0_ip"  ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="wwan0_mac"> MAC: </label>
+                            <input   id="wwan0_mac" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="wwan0_gate" >GATE:</label>
+                            <input  id="wwan0_gate" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="wwan0_dns" > DNS :</label>
+                            <input id="wwan0_dns"  ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td  align="left"><input type="button"  id="wwan0_button_get" class="btn btn-success net_button" value="GET"     onclick="javascript:net_get(this)"></input</td>
+                    <td  align="right" ><input type="button"  id="wwan0_gutton_set" class="btn btn-success net_button" value="STATIC-SET" onclick="javascript:static_set(this)"></input</td>
+                    <td  align="center" ><input type="button"  id="wwan0_button_dhcpc" class="btn btn-success net_button" value="DHCPC" onclick="javascript:dhcpc_set(this)"></input</td>
+                    </tr>
+                </table>
+                <table hidden class="net_table" id="ppp0_table">
+                    <tr>
+                        <th colspan="4" >PPP0 </th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="ppp0_ip" >IP: </label>
+                            <input  id="ppp0_ip" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="ppp0_mac" > MAC: </label>
+                            <input  id="ppp0_mac" ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="ppp0_gate" >GATE:</label>
+                            <input  id="ppp0_gate" ></input>
+                        </td>
+                        <td colspan="2">
+                            <label for="ppp0_dns" > DNS :</label>
+                            <input id="ppp0_dns"  ></input>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td  align="left"><input type="button"  id="ppp0_button_get"  class="btn btn-success net_button" value="GET"     onclick="javascript:net_get(this)"></input</td>
+                    <td  align="right" ><input type="button"  id="ppp0_gutton_set" class="btn btn-success net_button" value="STATIC-SET" onclick="javascript:static_set(this)"></input</td>
+                    <td  align="center" ><input type="button"  id="ppp0_button_dhcpc" class="btn btn-success net_button" value="DHCPC" onclick="javascript:dhcpc_set(this)"></input</td>
+                    </tr>
+                </table>
+        </p>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="src/js/cmi_at151_net.js"></script>
+
+
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

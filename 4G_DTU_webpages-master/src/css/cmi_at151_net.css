@@ -1,0 +1,32 @@
+.net_table{
+    width: 600px;
+    margin:auto;
+    align:center;
+    height:150px;
+    valign :middle ;
+}
+
+.net_table th{
+    text-align:left;
+    font-size:20px;
+    font-weight:bold;
+    
+    
+}
+.net_table  label{
+    display:inline-block;
+    width:50px;
+}
+
+.net_table  input{
+    type:text;
+    width:200px;
+    height:25px;
+    font-size:16px;
+    text-align:center;
+}
+.net_table .net_button{
+    width:105px;
+    height:30px;
+    text-align:center;
+}
