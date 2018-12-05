@@ -53,6 +53,8 @@
         var net_mac   = $("#"+net_name+"_mac").val();
         var net_gate   = $("#"+net_name+"_gate").val();
         var net_dns   = $("#"+net_name+"_dns").val();
+        var net_route   = $("#"+net_name+"_route").val();
+        var net_mask   = $("#"+net_name+"_mask").val();
         //alert(net_ip+":"+net_mac+":"+net_gate+":"+net_dns);
         var webSocketData = //将要发送给服务器的数据封装成一定的格式
 				{
@@ -61,7 +63,9 @@
                     "net_ip":net_ip,
                     "net_mac":net_mac,
                     "net_gate":net_gate,
-                    "net_dns":net_dns
+                    "net_dns":net_dns,
+                    "net_route":net_route,
+                    "net_mask":net_mask
 				};
         //alert(JSON.stringify(webSocketData));
 		websocket.send(JSON.stringify(webSocketData));
@@ -109,6 +113,8 @@
             $("#"+net_data['net_name']+"_mac").val(net_data['net_mac']);
             $("#"+net_data['net_name']+"_gate").val(net_data['net_gate']);
             $("#"+net_data['net_name']+"_dns").val(net_data['net_dns']);
+            $("#"+net_data['net_name']+"_route").val(net_data['net_route']);
+            $("#"+net_data['net_name']+"_mask").val(net_data['net_mask']);
         }
        //root = eval("(" + message.data + ")");
 	   //$("#uart_recv_date").append(message.data); //将接收到的数据添加到接收区中

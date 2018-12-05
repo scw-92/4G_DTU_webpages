@@ -40,6 +40,7 @@
 			if(selectedOption.value=="ON")
 			{
 				alert("uart_on");
+                /*
 				if(obj.options[0].value=="None")
 				{	
 					obj.options[0].value="ON";
@@ -57,7 +58,7 @@
 				}
 				selectedOption.value="None";
 				selectedOption.innerHTML="None";
-
+*/
 				webSocketData = 
 					{
 						"type":"uart_on", 
@@ -78,6 +79,7 @@
 			}else if(selectedOption.value=="OFF")
 			{
 				alert("uart_off");
+                /*
 				if(obj.options[0].value=="None")
 				{
 					obj.options[0].value="OFF";
@@ -95,7 +97,7 @@
 				}
 				selectedOption.value="None";
 				selectedOption.innerHTML="None";
-				
+				*/
 				webSocketData = //将要发送给服务器的数据封装成一定的格式
 				{
 					"type":"uart_off"

@@ -1,0 +1,13 @@
+
+.clearfix:after,.clearfix:before{ content: "";display: table;}
+.clearfix:after{ clear:both;}
+.clearfix{zoom:1;}
+
+.sub_line_div{
+    width: 650px;
+    height:450px;
+    float:left;
+    margin-top:10px;
+    margin-left:10px;
+    border:1px solid #000;
+     }

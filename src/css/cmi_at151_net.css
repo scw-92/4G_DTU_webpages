@@ -15,7 +15,8 @@
 }
 .net_table  label{
     display:inline-block;
-    width:50px;
+    width:75px;
+    margin-top:5px;
 }
 
 .net_table  input{
