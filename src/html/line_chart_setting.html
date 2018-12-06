@@ -37,6 +37,15 @@
 </nav>
 <div class="page-container">
 	<p class="f-20 text-success">Status <span class="f-14">v0.1</span></p>
+    <p>
+            <label>Line Chart Setup:</label>&nbsp;&nbsp;
+            <input type="checkbox" name="line_chart_select" value="temperature" id="temperature-input" onclick="javascript:line_select(this)" /> 温度 &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="line_chart_select" value="air_humidity" id="air_humidity-input" onclick="javascript:line_select(this)" /> 空气湿度  &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="line_chart_select" value="soil_moisture" id="soil_moisture-input" onclick="javascript:line_select(this)" /> 土壤湿度  &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="line_chart_select" value="light_intensity" id="light_intensity-input" onclick="javascript:line_select(this)" /> 光照强度  &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="line_chart_select" value="CO2_concentration" id="CO2_concentration-input" onclick="javascript:line_select(this)" /> C02浓度  &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="line_chart_select" value="pressure" id="pressure-input" onclick="javascript:line_select(this)" /> 大气压力  &nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
     <div class="clearfix" id="line_parent_div">
     </div>
 </div>
