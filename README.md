@@ -92,3 +92,35 @@
     "net_dns":"119.29.29.29"
   }
 ```
+
+#折线图图像设置
+## 前端发送给后台的数据接口
+```sh
+  注意：本数据接口通过websocket协议发送
+  webSocketData=
+    {
+        "type":"line_chart",
+        "line_name":line_name,  line_name是一个包含折线图名字的一个数组
+        "line_time":"real_time"  line_time = 'real_time' 表示实时数据；line_time = 'history' 表示历史数据（此功能暂未实现）
+    };
+    举列说明line_name的值：
+      1. 所有折线图全选：
+      line_name = [temperature,air_humidity,soil_moisture,light_intensity,CO2_concentration,pressure]
+      2. 只选择温度折线图：
+      line_name = [temperature,none,none,none,none,none]
+
+```
+## 前端接收的后台数据接口
+```sh
+  接收到的数据接口分为两种：
+  1. 连接时的数据接口：包含"connected"的一个字符串
+  
+  2. 数据通信时的数据接口：
+  line_data = 
+             {
+               "temperature":[value,date],
+               "air_humidity":[value,date],
+                ...
+             }
+   3. 关于时间采用的问题，目前默认采用前端机器的时间，数据中的date只是预留的接口，其前端功能暂未实现
+```
