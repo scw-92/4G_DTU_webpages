@@ -106,7 +106,7 @@
       1. 所有折线图全选：
       line_name = [temperature,air_humidity,soil_moisture,light_intensity,CO2_concentration,pressure]
       2. 只选择温度折线图：
-      line_name = [temperature,none,none,none,none,none]
+      line_name = [temperature]
 
 ```
 ## 前端接收的后台数据接口
@@ -115,11 +115,27 @@
   1. 连接时的数据接口：包含"connected"的一个字符串
   
   2. 数据通信时的数据接口：
-  line_data = 
-             {
-               "temperature":[value,date],
-               "air_humidity":[value,date],
-                ...
-             }
+  /* 收到的数据结构形式
+                line_data = 
+                    {
+                        "type":"line_chart",
+                        "data_type":"real_time",//history
+                        "data":{
+                                "temperature":[[value,date],[value1,date1]]
+                                "air_humidity":[[value,date],[value1,date1]]
+                        }
+                    ...
+                    }
+            */
+  2.1 实时数据：
+        Python.server.send_message(client,'{"type":"line_chart","data_type":"real_time","data":{折线图名称:[[y_value,x_date]]}}')
+        采用PC机时间：Python.server.send_message(client,'{"type":"line_chart","data_type":"real_time","data":{"temperature":[[1]]}}')
+        采用开发板时间：Python.server.send_message(client,'{"type":"line_chart","data_type":"real_time","data":{"temperature":[[1，"5:18:18"]]}}')
+  2.2 历史数据：
+   采用开发板时间：Python.server.send_message(client,'{"type":"line_chart","data_type":"history","data":{"temperature":[[1,"5:18:16"],[1,"5:18:18"],[1,"5:18:22"],[1,"5:18:24"],[1,"5:18:26"]]}}')
+
+  2.2 历史数据：
+      
+ 
    3. 关于时间采用的问题，目前默认采用前端机器的时间，数据中的date只是预留的接口，其前端功能暂未实现
 ```
