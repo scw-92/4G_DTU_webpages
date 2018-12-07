@@ -143,7 +143,8 @@
             "type":"line_chart",
             "data_type":"real_time",
             "data":{
-                      "temperature":[[1]]
+                      "temperature":[[1]],
+                     ......
             }
         }')
         
@@ -153,7 +154,8 @@
             "type":"line_chart",
              "data_type":"real_time",
              "data":{
-                      "temperature":[[1，"5:18:18"]]
+                      "temperature":[[1，"5:18:18"]],
+                     ......
                       
                      }
         }')
@@ -171,7 +173,8 @@
                                       [1,"5:18:24"],
                                       [1,"5:18:26"]
                                       ]
-                     }
+                     },
+                     ......
          }')
 
   2.2 历史数据：
