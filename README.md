@@ -128,11 +128,51 @@
                     }
             */
   2.1 实时数据：
-        Python.server.send_message(client,'{"type":"line_chart","data_type":"real_time","data":{折线图名称:[[y_value,x_date]]}}')
-        采用PC机时间：Python.server.send_message(client,'{"type":"line_chart","data_type":"real_time","data":{"temperature":[[1]]}}')
-        采用开发板时间：Python.server.send_message(client,'{"type":"line_chart","data_type":"real_time","data":{"temperature":[[1，"5:18:18"]]}}')
+        Python.server.send_message(client,
+        '{
+            "type":"line_chart",
+            "data_type":"real_time",
+            "data":{
+                    折线图名称:[[y_value,x_date]]
+                    }
+         }')
+         
+        采用PC机时间：
+        Python.server.send_message(client,
+        '{
+            "type":"line_chart",
+            "data_type":"real_time",
+            "data":{
+                      "temperature":[[1]]
+            }
+        }')
+        
+        采用开发板时间：
+        Python.server.send_message(client,
+        '{
+            "type":"line_chart",
+             "data_type":"real_time",
+             "data":{
+                      "temperature":[[1，"5:18:18"]]
+                      
+                     }
+        }')
   2.2 历史数据：
-   采用开发板时间：Python.server.send_message(client,'{"type":"line_chart","data_type":"history","data":{"temperature":[[1,"5:18:16"],[1,"5:18:18"],[1,"5:18:22"],[1,"5:18:24"],[1,"5:18:26"]]}}')
+   采用开发板时间：
+   Python.server.send_message(client,
+        '{
+            "type":"line_chart",
+             "data_type":"history",
+             "data":{
+                      "temperature":[
+                                      [1,"5:18:16"],
+                                      [1,"5:18:18"],
+                                      [1,"5:18:22"],
+                                      [1,"5:18:24"],
+                                      [1,"5:18:26"]
+                                      ]
+                     }
+         }')
 
   2.2 历史数据：
       
