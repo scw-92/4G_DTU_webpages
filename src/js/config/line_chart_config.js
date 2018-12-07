@@ -1,4 +1,14 @@
 // 温度，空气湿度，土壤湿度，光照强度，CO2浓度，压强
+var ip_addr = document.location.hostname; //客服端要访问的主机IP地址（列如：192.168.4.250）
+window.WebSocket = window.WebSocket || window.MozWebSocket;
+//var websocket = new WebSocket('ws://' + '192.168.4.250' +':9988',
+//var websocket = new WebSocket('ws://' + ip_addr +':9988',
+var websocket = new WebSocket('ws://' + '192.168.4.101' + ':9001');
+
+
+
+
+var line_timer = ""; //此页面的复选框定时器的引用
 var echarts_option = {
 
     temperature: {
@@ -6,35 +16,37 @@ var echarts_option = {
             text: '温度采集',
         },
         tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                var date = new Date(params.value[0]);
-                data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                return data + '<br/>' + params.value[1];
+            trigger: 'axis',
+            title: "temperature",
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
             }
+        },
+        legend: {
+            data: ['温度采集']
         },
         toolbox: {
             show: true,
             feature: {
                 dataZoom: {
-                    yAxisIndex: 'none'
+                    yAxisIndex: 'none',
                 },
                 mark: {
                     show: true
                 },
                 dataView: {
-                    show: true,
-                    title: '数据视图',
                     readOnly: true,
-                    lang: ['数据视图', '关闭', '刷新'],
                     optionToContent: function(opt) {
 
-                        var axisData = opt.series[0].data;
-                        var series = opt.series;
+                        var axisData = opt.xAxis[0].data;
+                        var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>温度</td>' + '</tr>';
                         for (var i = 0,
                         l = axisData.length; i < l; i++) {
-                            table += '<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>';
+                            table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
                         table += '</tbody></table>';
@@ -46,35 +58,34 @@ var echarts_option = {
                     title: '历史数据',
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
-                    onclick: function() {
-                        alert('myToolHandler')
+                    onclick: function(obj) {
+                            history_data(obj);
                     }
                 },
-
-                saveAsImage: {
-                    show: true
-                },
-                restore: {
-                    show: true
-                }
+                restore: {},
+                saveAsImage: {}
             }
         },
         dataZoom: {
-            show: true,
-            start: 0
-        },
-        legend: {
-            data: ['温度采集']
-        },
-        grid: {
-            y2: 80
+            show: false,
+            start: 0,
+            end: 100
         },
         xAxis: [{
-            type: 'time',
-            splitNumber: 5
+            type: 'category',
+            name: '采样时间',
+            boundaryGap: true,
+
+            data: []
+
         }],
         yAxis: [{
             type: 'value',
+            //scale: true,
+            name: '温度',
+            //max: 30,
+            //min: 0,
+            boundaryGap: [0.2, 0.2],
             axisLabel: {
                 formatter: '{value} °C'
             }
@@ -82,13 +93,14 @@ var echarts_option = {
         series: [{
             name: '温度采集',
             type: 'line',
-            showAllSymbol: true,
-            symbolSize: 8,
-            data: [[new Date(), 1], [new Date(), 2], [new Date(), 3], [new Date(), 4], [new Date(), 5], ],
+            data: [],
             markPoint: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        console.log(value);
+                        return '温度采集' + '<br/>' + value.data.name + ': ' + value.data.value + ' °C'
+                    }
                 },
                 data: [{
                     type: 'max',
@@ -102,7 +114,9 @@ var echarts_option = {
             markLine: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        return '温度采集' + '<br/>' + value.data.name + ': ' + value.data.value + ' °C'
+                    }
                 },
                 data: [{
                     type: 'average',
@@ -110,7 +124,6 @@ var echarts_option = {
                 }]
             }
         }]
-
     },
 
     air_humidity: {
@@ -118,35 +131,37 @@ var echarts_option = {
             text: '空气湿度',
         },
         tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                var date = new Date(params.value[0]);
-                data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                return data + '<br/>' + params.value[1];
+            trigger: 'axis',
+            title: "air_humidity",
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
             }
+        },
+        legend: {
+            data: ['空气湿度']
         },
         toolbox: {
             show: true,
             feature: {
                 dataZoom: {
-                    yAxisIndex: 'none'
+                    yAxisIndex: 'none',
                 },
                 mark: {
                     show: true
                 },
                 dataView: {
-                    show: true,
-                    title: '数据视图',
                     readOnly: true,
-                    lang: ['数据视图', '关闭', '刷新'],
                     optionToContent: function(opt) {
 
-                        var axisData = opt.series[0].data;
-                        var series = opt.series;
+                        var axisData = opt.xAxis[0].data;
+                        var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>空气湿度</td>' + '</tr>';
                         for (var i = 0,
                         l = axisData.length; i < l; i++) {
-                            table += '<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>';
+                            table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
                         table += '</tbody></table>';
@@ -158,35 +173,34 @@ var echarts_option = {
                     title: '历史数据',
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
-                    onclick: function() {
-                        alert('myToolHandler')
+                    onclick: function(obj) {
+                            history_data(obj);
                     }
                 },
-
-                saveAsImage: {
-                    show: true
-                },
-                restore: {
-                    show: true
-                }
+                restore: {},
+                saveAsImage: {}
             }
         },
         dataZoom: {
-            show: true,
-            start: 0
-        },
-        legend: {
-            data: ['空气湿度']
-        },
-        grid: {
-            y2: 80
+            show: false,
+            start: 0,
+            end: 100
         },
         xAxis: [{
-            type: 'time',
-            splitNumber: 5
+            type: 'category',
+            name: '采样时间',
+            boundaryGap: true,
+
+            data: []
+
         }],
         yAxis: [{
             type: 'value',
+            //scale: true,
+            name: '空气湿度',
+            max: 100,
+            min: 0,
+            boundaryGap: [0.2, 0.2],
             axisLabel: {
                 formatter: '{value} %'
             }
@@ -194,15 +208,14 @@ var echarts_option = {
         series: [{
             name: '空气湿度',
             type: 'line',
-            showAllSymbol: true,
-            symbolSize: 8,
-            data: [
-
-            ],
+            data: [],
             markPoint: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        console.log(value);
+                        return '空气湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %'
+                    }
                 },
                 data: [{
                     type: 'max',
@@ -216,7 +229,9 @@ var echarts_option = {
             markLine: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        return '空气湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %'
+                    }
                 },
                 data: [{
                     type: 'average',
@@ -224,43 +239,44 @@ var echarts_option = {
                 }]
             }
         }]
-
     },
 
     soil_moisture: {
-        title: {
+       title: {
             text: '土壤湿度',
         },
         tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                var date = new Date(params.value[0]);
-                data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                return data + '<br/>' + params.value[1];
+            trigger: 'axis',
+            title: "soil_moisture",
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
             }
+        },
+        legend: {
+            data: ['土壤湿度']
         },
         toolbox: {
             show: true,
             feature: {
                 dataZoom: {
-                    yAxisIndex: 'none'
+                    yAxisIndex: 'none',
                 },
                 mark: {
                     show: true
                 },
                 dataView: {
-                    show: true,
-                    title: '数据视图',
                     readOnly: true,
-                    lang: ['数据视图', '关闭', '刷新'],
                     optionToContent: function(opt) {
 
-                        var axisData = opt.series[0].data;
-                        var series = opt.series;
+                        var axisData = opt.xAxis[0].data;
+                        var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>土壤湿度</td>' + '</tr>';
                         for (var i = 0,
                         l = axisData.length; i < l; i++) {
-                            table += '<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>';
+                            table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
                         table += '</tbody></table>';
@@ -272,35 +288,34 @@ var echarts_option = {
                     title: '历史数据',
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
-                    onclick: function() {
-                        alert('myToolHandler')
+                    onclick: function(obj) {
+                            history_data(obj);
                     }
                 },
-
-                saveAsImage: {
-                    show: true
-                },
-                restore: {
-                    show: true
-                }
+                restore: {},
+                saveAsImage: {}
             }
         },
         dataZoom: {
-            show: true,
-            start: 0
-        },
-        legend: {
-            data: ['土壤湿度']
-        },
-        grid: {
-            y2: 80
+            show: false,
+            start: 0,
+            end: 100
         },
         xAxis: [{
-            type: 'time',
-            splitNumber: 5
+            type: 'category',
+            name: '采样时间',
+            boundaryGap: true,
+
+            data: []
+
         }],
         yAxis: [{
             type: 'value',
+            //scale: true,
+            name: '土壤湿度',
+            max: 100,
+            min: 0,
+            boundaryGap: [0.2, 0.2],
             axisLabel: {
                 formatter: '{value} %'
             }
@@ -308,15 +323,14 @@ var echarts_option = {
         series: [{
             name: '土壤湿度',
             type: 'line',
-            showAllSymbol: true,
-            symbolSize: 8,
-            data: [
-
-            ],
+            data: [],
             markPoint: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        console.log(value);
+                        return '土壤湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %'
+                    }
                 },
                 data: [{
                     type: 'max',
@@ -330,7 +344,9 @@ var echarts_option = {
             markLine: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        return '土壤湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %'
+                    }
                 },
                 data: [{
                     type: 'average',
@@ -338,43 +354,44 @@ var echarts_option = {
                 }]
             }
         }]
-
     },
 
     light_intensity: {
-        title: {
+       title: {
             text: '光照强度',
         },
         tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                var date = new Date(params.value[0]);
-                data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                return data + '<br/>' + params.value[1];
+            trigger: 'axis',
+            title: "light_intensity",
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
             }
+        },
+        legend: {
+            data: ['光照强度']
         },
         toolbox: {
             show: true,
             feature: {
                 dataZoom: {
-                    yAxisIndex: 'none'
+                    yAxisIndex: 'none',
                 },
                 mark: {
                     show: true
                 },
                 dataView: {
-                    show: true,
-                    title: '数据视图',
                     readOnly: true,
-                    lang: ['数据视图', '关闭', '刷新'],
                     optionToContent: function(opt) {
 
-                        var axisData = opt.series[0].data;
-                        var series = opt.series;
+                        var axisData = opt.xAxis[0].data;
+                        var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>光照强度</td>' + '</tr>';
                         for (var i = 0,
                         l = axisData.length; i < l; i++) {
-                            table += '<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>';
+                            table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
                         table += '</tbody></table>';
@@ -386,51 +403,49 @@ var echarts_option = {
                     title: '历史数据',
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
-                    onclick: function() {
-                        alert('myToolHandler')
+                    onclick: function(obj) {
+                            history_data(obj);
                     }
                 },
-
-                saveAsImage: {
-                    show: true
-                },
-                restore: {
-                    show: true
-                }
+                restore: {},
+                saveAsImage: {}
             }
         },
         dataZoom: {
-            show: true,
-            start: 0
-        },
-        legend: {
-            data: ['光照强度']
-        },
-        grid: {
-            y2: 80
+            show: false,
+            start: 0,
+            end: 100
         },
         xAxis: [{
-            type: 'time',
-            splitNumber: 5
+            type: 'category',
+            name: '采样时间',
+            boundaryGap: true,
+
+            data: []
+
         }],
         yAxis: [{
             type: 'value',
+            //scale: true,
+            name: '光照强度',
+            //max: 30,
+            //min: 0,
+            boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} %'
+                formatter: '{value} CD'
             }
         }],
         series: [{
             name: '光照强度',
             type: 'line',
-            showAllSymbol: true,
-            symbolSize: 8,
-            data: [
-
-            ],
+            data: [],
             markPoint: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        console.log(value);
+                        return '光照强度' + '<br/>' + value.data.name + ': ' + value.data.value + ' CD²'
+                    }
                 },
                 data: [{
                     type: 'max',
@@ -444,7 +459,9 @@ var echarts_option = {
             markLine: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        return '光照强度' + '<br/>' + value.data.name + ': ' + value.data.value + ' CD'
+                    }
                 },
                 data: [{
                     type: 'average',
@@ -452,43 +469,44 @@ var echarts_option = {
                 }]
             }
         }]
-
     },
 
     CO2_concentration: {
-        title: {
+       title: {
             text: 'CO2浓度',
         },
         tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                var date = new Date(params.value[0]);
-                data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                return data + '<br/>' + params.value[1];
+            trigger: 'axis',
+            title: "CO2_concentration",
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
             }
+        },
+        legend: {
+            data: ['CO2浓度']
         },
         toolbox: {
             show: true,
             feature: {
                 dataZoom: {
-                    yAxisIndex: 'none'
+                    yAxisIndex: 'none',
                 },
                 mark: {
                     show: true
                 },
                 dataView: {
-                    show: true,
-                    title: '数据视图',
                     readOnly: true,
-                    lang: ['数据视图', '关闭', '刷新'],
                     optionToContent: function(opt) {
 
-                        var axisData = opt.series[0].data;
-                        var series = opt.series;
+                        var axisData = opt.xAxis[0].data;
+                        var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>CO2浓度</td>' + '</tr>';
                         for (var i = 0,
                         l = axisData.length; i < l; i++) {
-                            table += '<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>';
+                            table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
                         table += '</tbody></table>';
@@ -500,51 +518,49 @@ var echarts_option = {
                     title: '历史数据',
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
-                    onclick: function() {
-                        alert('myToolHandler')
+                    onclick: function(obj) {
+                            history_data(obj);
                     }
                 },
-
-                saveAsImage: {
-                    show: true
-                },
-                restore: {
-                    show: true
-                }
+                restore: {},
+                saveAsImage: {}
             }
         },
         dataZoom: {
-            show: true,
-            start: 0
-        },
-        legend: {
-            data: ['CO2浓度']
-        },
-        grid: {
-            y2: 80
+            show: false,
+            start: 0,
+            end: 100
         },
         xAxis: [{
-            type: 'time',
-            splitNumber: 5
+            type: 'category',
+            name: '采样时间',
+            boundaryGap: true,
+
+            data: []
+
         }],
         yAxis: [{
             type: 'value',
+            //scale: true,
+            name: 'CO2浓度',
+            //max: 30,
+            //min: 0,
+            boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} %'
+                formatter: '{value} ppm'
             }
         }],
         series: [{
             name: 'CO2浓度',
             type: 'line',
-            showAllSymbol: true,
-            symbolSize: 8,
-            data: [
-
-            ],
+            data: [],
             markPoint: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        console.log(value);
+                        return 'CO2浓度' + '<br/>' + value.data.name + ': ' + value.data.value + ' ppm'
+                    }
                 },
                 data: [{
                     type: 'max',
@@ -558,7 +574,9 @@ var echarts_option = {
             markLine: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        return 'CO2浓度' + '<br/>' + value.data.name + ': ' + value.data.value + ' ppm'
+                    }
                 },
                 data: [{
                     type: 'average',
@@ -566,43 +584,44 @@ var echarts_option = {
                 }]
             }
         }]
-
     },
 
     pressure: {
-        title: {
-            text: '大气压强',
+       title: {
+            text: '压强',
         },
         tooltip: {
-            trigger: 'item',
-            formatter: function(params) {
-                var date = new Date(params.value[0]);
-                data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                return data + '<br/>' + params.value[1];
+            trigger: 'axis',
+            title: "pressure",
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
             }
+        },
+        legend: {
+            data: ['压强']
         },
         toolbox: {
             show: true,
             feature: {
                 dataZoom: {
-                    yAxisIndex: 'none'
+                    yAxisIndex: 'none',
                 },
                 mark: {
                     show: true
                 },
                 dataView: {
-                    show: true,
-                    title: '数据视图',
                     readOnly: true,
-                    lang: ['数据视图', '关闭', '刷新'],
                     optionToContent: function(opt) {
 
-                        var axisData = opt.series[0].data;
-                        var series = opt.series;
-                        var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>大气压强</td>' + '</tr>';
+                        var axisData = opt.xAxis[0].data;
+                        var seriesdata = opt.series[0].data;
+                        var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>压强</td>' + '</tr>';
                         for (var i = 0,
                         l = axisData.length; i < l; i++) {
-                            table += '<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>';
+                            table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
                         table += '</tbody></table>';
@@ -614,51 +633,49 @@ var echarts_option = {
                     title: '历史数据',
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
-                    onclick: function() {
-                        alert('myToolHandler')
+                    onclick: function(obj) {
+                            history_data(obj);
                     }
                 },
-
-                saveAsImage: {
-                    show: true
-                },
-                restore: {
-                    show: true
-                }
+                restore: {},
+                saveAsImage: {}
             }
         },
         dataZoom: {
-            show: true,
-            start: 0
-        },
-        legend: {
-            data: ['大气压强']
-        },
-        grid: {
-            y2: 80
+            show: false,
+            start: 0,
+            end: 100
         },
         xAxis: [{
-            type: 'time',
-            splitNumber: 5
+            type: 'category',
+            name: '采样时间',
+            boundaryGap: true,
+
+            data: []
+
         }],
         yAxis: [{
             type: 'value',
+            //scale: true,
+            name: '压强',
+            //max: 30,
+            //min: 0,
+            boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} %'
+                formatter: '{value} Pa'
             }
         }],
         series: [{
-            name: '大气压强',
+            name: '压强',
             type: 'line',
-            showAllSymbol: true,
-            symbolSize: 8,
-            data: [
-
-            ],
+            data: [],
             markPoint: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        console.log(value);
+                        return '压强' + '<br/>' + value.data.name + ': ' + value.data.value + ' Pa'
+                    }
                 },
                 data: [{
                     type: 'max',
@@ -672,7 +689,9 @@ var echarts_option = {
             markLine: {
                 tooltip: {
                     trigger: 'item',
-                    formatter: ""
+                    formatter: function(value) {
+                        return '压强' + '<br/>' + value.data.name + ': ' + value.data.value + ' Pa'
+                    }
                 },
                 data: [{
                     type: 'average',
@@ -680,7 +699,6 @@ var echarts_option = {
                 }]
             }
         }]
-
     }
 };
 // 折线图的html元素div的ID = line_names[x]

@@ -12,21 +12,32 @@
         "line_time":"real_time"  line_time = 'real_time' 表示实时数据，line_time = 'history' 表示历史数据
     };
     6. 收到的数据结构形式：
+                /* 收到的数据结构形式
                 line_data = 
                     {
-                        "temperature":[value,date],
-                        "air_humidity":[value,date],
+                        "type":"line_chart",
+                        "data_type":"real_time",//history
+                        "data":{
+                                "temperature":[[value,date],[value1,date1]]
+                                "air_humidity":[[value,date],[value1,date1]]
+                        }
                     ...
                     }
-*/
+            */
 
-var ip_addr = document.location.hostname; //客服端要访问的主机IP地址（列如：192.168.4.250）
-window.WebSocket = window.WebSocket || window.MozWebSocket;
-//var websocket = new WebSocket('ws://' + '192.168.4.250' +':9988',
-//var websocket = new WebSocket('ws://' + ip_addr +':9988',
-var websocket = new WebSocket('ws://' + '192.168.4.100' + ':9001');
+function history_data(obj) {
 
-var line_timer = ""; //此页面的定时器的引用
+    clearInterval(line_timer);
+    var line_name = obj.option.tooltip[0].title;
+    var webSocketData = {
+        "type": "line_chart",
+        "line_name": line_name,
+        "line_time": "history" //line_time = 'real_time' 表示实时数据，line_time = 'history' 表示历史数据
+    };
+    websocket.send(JSON.stringify(webSocketData));
+
+}
+
 function line_div_setup() //根据折线图的数据建立折线图
 {
     var i = 0;
@@ -84,7 +95,8 @@ function line_timer_handle() {
             line_name[line_count] = line_configs["line_names"][line_count];
 
         } else {
-            line_name[line_count] = "none";
+            //line_name[line_count] = "none";
+            ;
         }
     }
 
@@ -93,7 +105,7 @@ function line_timer_handle() {
         "line_name": line_name,
         "line_time": "real_time" //line_time = 'real_time' 表示实时数据，line_time = 'history' 表示历史数据
     };
-    //websocket.send(JSON.stringify(webSocketData));
+    websocket.send(JSON.stringify(webSocketData));
 }
 
 websocket.onopen = function() { //注册3个事件
@@ -105,7 +117,7 @@ websocket.onerror = function() {
 };
 websocket.onmessage = function(message) {
 
-    console.log(message.data);
+   // console.log(message.data);
 
     if (message.data.match("connected")) alert(message.data);
     else {
@@ -113,23 +125,66 @@ websocket.onmessage = function(message) {
         /* 收到的数据结构形式
                 line_data = 
                     {
-                        "temperature":[value,date],
-                        "air_humidity":[value,date],
+                        "type":"line_chart",
+                        "data_type":"real_time",//history
+                        "data":{
+                                "temperature":[[value,date],[value1,date1]]
+                                "air_humidity":[[value,date],[value1,date1]]
+                        }
                     ...
                     }
             */
         var line_data = JSON.parse(message.data);
 
-        for (var key in line_data) {
-            var data = line_data[key][1];
-            var date = line_data[key][0];
-            var index = line_configs["line_names"].indexOf(key);
-            echarts_option[key]["series"][0]["data"].push([new Date(), date]);
-            line_configs["my_echarts_obj"][index].setOption(echarts_option[line_configs["line_names"][index]]);
-            //echarts_option["temperature"]["series"][0]["data"].push([new Date(),count++]);
-            //line_configs["my_echarts_obj"][0].setOption(echarts_option[line_configs["line_names"][0]]);
-            //console.log(echarts_option["temperature"]["series"][0]["data"]);
-            //console.log(line_data);
+        if (line_data["type"] == "line_chart") {
+
+            if (line_data["data_type"] == "real_time") {
+                for (var key in line_data["data"]) {
+
+                    var data0 = echarts_option[key].series[0].data;
+                    if (data0.length > 9) {
+                        data0.shift();
+                        echarts_option[key].xAxis[0].data.shift();
+
+                    }
+
+                    data0.push(line_data["data"][key][0][0]);
+
+                    var x_date = line_data["data"][key][0][1];
+                    //console.log("x_date = " + x_date);
+                    if (x_date == undefined) {
+                        x_date = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+                        //console.log("x_date 11= " + x_date);
+                    }
+                    echarts_option[key].xAxis[0].data.push(x_date);
+                    echarts_option[key].dataZoom.show = false;
+                    var index = line_configs["line_names"].indexOf(key);
+                    line_configs["my_echarts_obj"][index].setOption(echarts_option[key]);
+                    //echarts_option["temperature"]["series"][0]["data"].push([new Date(),count++]);
+                    //line_configs["my_echarts_obj"][0].setOption(echarts_option[line_configs["line_names"][0]]);
+                    //console.log(echarts_option["temperature"]["series"][0]["data"]);
+                    //console.log(line_data);
+                }
+            } else {
+                for (var key in line_data["data"]) {
+                    var data0 = echarts_option[key].series[0].data;
+                    var data_length = line_data["data"][key].length;
+                    for (var i = 0;
+                    i < data_length; i++) {
+                        data0.push(line_data["data"][key][i][0]);
+
+                        var x_date = line_data["data"][key][i][1];
+
+                        if (x_date == "undefined") {
+                            x_date = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+                        }
+                        echarts_option[key].xAxis[0].data.push(x_date);
+                        echarts_option[key].dataZoom.show = true;
+                        var index = line_configs["line_names"].indexOf(key);
+                        line_configs["my_echarts_obj"][index].setOption(echarts_option[key]);
+                    }
+                }
+            }
         }
 
     }
@@ -139,5 +194,4 @@ $(function() {
 
     line_div_setup();
     //line_timer = setInterval(line_timer_handle,1000);
-
 });
