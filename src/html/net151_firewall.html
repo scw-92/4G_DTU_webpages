@@ -1,0 +1,169 @@
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="../../favicon.ico" />
+    <link rel="Shortcut Icon" href="../../favicon.ico" />
+    <!--[if lt IE 9]>
+<script type="text/javascript" src="../../lib/html5shiv.js"></script>
+<script type="text/javascript" src="../../lib/respond.min.js"></script>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="../../lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/firewall.css" />
+    <!--[if IE 6]>
+<script type="text/javascript" src="../../lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+    <title>防火墙设置</title>
+</head>
+
+<body>
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont"></i> 首页
+        <span class="c-gray en">&gt;</span> 网络
+        <span class="c-gray en">&gt;</span> 防火墙设置
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont"></i></a>
+    </nav>
+    <div class="page-container">
+        <p class="f-20 text-success">Status <span class="f-14">v0.1</span></p>
+        <p id="fire-box-setup" class="firewall-p">
+            <label>Firewall Setup:</label>&nbsp;&nbsp;
+            <input type="checkbox" name="firewall" value="whitelist" id="whitelist" onclick="javascript:firewall_select(this)" /> whitelist &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="firewall" value="blacklist" id="blacklist" onclick="javascript:firewall_select(this)" /> blacklist &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="firewall" value="fire-message" id="firewallmessage" onclick="javascript:firewall_select(this)" /> fire-message &nbsp;&nbsp;&nbsp;&nbsp;
+            <br /> <br />
+        </p>
+        <form id="whitelist_form" hidden>
+            <table class="firewall_table" id="whitelist_table">
+                <tbody>
+                    <tr>
+                        <td colspan="2">WhiteListSet: </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="whitelist_ip" class="firewall_label">IP: </label> <input id="whitelist" />
+                        </td>
+                        <td>
+                            <label for="whitelist_ip_out"> Data Direction: </label>
+                            <input type="checkbox" name="whitelist_ip_direc" value="whitelist" id="whitelist_ip_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_ip_direc" value="whitelist" id="whitelist_ip_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="whitelist_port" class="firewall_label">Port: </label> <input id="whitelist_port" />
+                        </td>
+                        <td>
+                            <label for="whitelist_port_out"> Data Direction: </label>
+                            <input type="checkbox" name="whitelist_port_direc" value="whitelist" id="whitelist_port_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_port_direc" value="whitelist" id="whitelist_port_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="whitelist_protocol_tcp"> Protocol: </label>
+                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_tcp" onclick="javascript:data_direc_select(this)" /> tcp &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_udp" onclick="javascript:data_direc_select(this)" /> udp &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" name="" value="提交" class="input-button btn pink" id="whitelist_button" onclick="javascript:firewall_button(this)">
+                        </td>
+                        <td>
+                            <input type="reset" name="" value="重置" class="input-button btn pink">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <form id="blacklist_form" hidden>
+            <table class="firewall_table" id="blacklist_table">
+                <tbody>
+                    <tr>
+                        <th colspan="2">BlackListSet: </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="blacklist_ip" class="firewall_label">IP: </label> <input id="blacklist" />
+                        </td>
+                        <td>
+                            <label for="blacklist_ip_out"> Data Direction: </label>
+                            <input type="checkbox" name="blacklist_ip_direc" value="blacklist" id="blacklist_ip_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="blacklist_ip_direc" value="blacklist" id="blacklist_ip_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="blacklist_port" class="firewall_label">Port: </label> <input id="blacklist_port" />
+                        </td>
+                        <td>
+                            <label for="blacklist_port_out"> Data Direction: </label>
+                            <input type="checkbox" name="blacklist_port_direc" value="blacklist" id="blacklist_port_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="blacklist_port_direc" value="blacklist" id="blacklist_port_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label for="blacklist_protocol_tcp"> Protocol: </label>
+                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_tcp" onclick="javascript:data_direc_select(this)" /> tcp &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_udp" onclick="javascript:data_direc_select(this)" /> udp &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" name="" value="提交" class="input-button btn pink" id="blacklist_button" onclick="javascript:firewall_button(this)">
+                        </td>
+                        <td>
+                            <input type="reset" name="" value="重置" class="btn pink input-button">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <form id="firewallmessage_form" hidden>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon">FireWall Message</span>
+                <div contenteditable="true" id="firewallmessage-div" data-spy="scroll" data-offset="200px" style="height:200px;overflow:auto;text-indent: 2em;padding-top:15px;padding-left:15px;text-overflow: ellipsis; word-break: break-all;text-shadow: 2px 2px #f2e78d; position: relative;border:1px solid #000 "></div>
+            </div>
+            <table class="firewall_table">
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="button" name="" value="提交" class="input-button btn pink" id="firewallmessage_button_submit" onclick="javascript:firewall_button(this)">
+                        </td>
+                        <td>
+                            <input type="button" name="" value="重置" class="input-button btn pink" id="firewallmessage_button_reset" onclick="javascript:firewall_button(this)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../../lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="../../static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="../../static/h-ui.admin/js/H-ui.admin.js"></script>
+    <!--/_footer 作为公共模版分离出去-->
+    <!--请在下方写此页面业务相关的脚本-->
+    <script type="text/javascript" src="../../lib/My97DatePicker/4.8/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="../../lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="../../lib/jquery.validation/1.14.0/messages_zh.js"></script>
+    <script type="text/javascript" src="../js/firewall.js"></script>
+    <!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>
