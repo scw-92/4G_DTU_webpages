@@ -45,7 +45,7 @@ var echarts_option = {
                         var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>温度</td>' + '</tr>';
                         for (var i = 0,
-                        l = axisData.length; i < l; i++) {
+                                l = axisData.length; i < l; i++) {
                             table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
@@ -59,10 +59,12 @@ var echarts_option = {
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
                     onclick: function(obj) {
-                            history_data(obj);
+                        history_data(obj);
                     }
                 },
-                restore: {},
+                restore: {
+
+                },
                 saveAsImage: {}
             }
         },
@@ -103,13 +105,14 @@ var echarts_option = {
                     }
                 },
                 data: [{
-                    type: 'max',
-                    name: '最大值'
-                },
-                {
-                    type: 'min',
-                    name: '最小值'
-                }]
+                        type: 'max',
+                        name: '最大值'
+                    },
+                    {
+                        type: 'min',
+                        name: '最小值'
+                    }
+                ]
             },
             markLine: {
                 tooltip: {
@@ -160,7 +163,7 @@ var echarts_option = {
                         var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>空气湿度</td>' + '</tr>';
                         for (var i = 0,
-                        l = axisData.length; i < l; i++) {
+                                l = axisData.length; i < l; i++) {
                             table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
@@ -174,7 +177,7 @@ var echarts_option = {
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
                     onclick: function(obj) {
-                            history_data(obj);
+                        history_data(obj);
                     }
                 },
                 restore: {},
@@ -218,13 +221,14 @@ var echarts_option = {
                     }
                 },
                 data: [{
-                    type: 'max',
-                    name: '最大值'
-                },
-                {
-                    type: 'min',
-                    name: '最小值'
-                }]
+                        type: 'max',
+                        name: '最大值'
+                    },
+                    {
+                        type: 'min',
+                        name: '最小值'
+                    }
+                ]
             },
             markLine: {
                 tooltip: {
@@ -242,7 +246,7 @@ var echarts_option = {
     },
 
     soil_moisture: {
-       title: {
+        title: {
             text: '土壤湿度',
         },
         tooltip: {
@@ -275,7 +279,7 @@ var echarts_option = {
                         var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>土壤湿度</td>' + '</tr>';
                         for (var i = 0,
-                        l = axisData.length; i < l; i++) {
+                                l = axisData.length; i < l; i++) {
                             table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
@@ -289,7 +293,7 @@ var echarts_option = {
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
                     onclick: function(obj) {
-                            history_data(obj);
+                        history_data(obj);
                     }
                 },
                 restore: {},
@@ -333,13 +337,14 @@ var echarts_option = {
                     }
                 },
                 data: [{
-                    type: 'max',
-                    name: '最大值'
-                },
-                {
-                    type: 'min',
-                    name: '最小值'
-                }]
+                        type: 'max',
+                        name: '最大值'
+                    },
+                    {
+                        type: 'min',
+                        name: '最小值'
+                    }
+                ]
             },
             markLine: {
                 tooltip: {
@@ -357,7 +362,7 @@ var echarts_option = {
     },
 
     light_intensity: {
-       title: {
+        title: {
             text: '光照强度',
         },
         tooltip: {
@@ -390,7 +395,7 @@ var echarts_option = {
                         var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>光照强度</td>' + '</tr>';
                         for (var i = 0,
-                        l = axisData.length; i < l; i++) {
+                                l = axisData.length; i < l; i++) {
                             table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
@@ -404,7 +409,7 @@ var echarts_option = {
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
                     onclick: function(obj) {
-                            history_data(obj);
+                        history_data(obj);
                     }
                 },
                 restore: {},
@@ -448,13 +453,14 @@ var echarts_option = {
                     }
                 },
                 data: [{
-                    type: 'max',
-                    name: '最大值'
-                },
-                {
-                    type: 'min',
-                    name: '最小值'
-                }]
+                        type: 'max',
+                        name: '最大值'
+                    },
+                    {
+                        type: 'min',
+                        name: '最小值'
+                    }
+                ]
             },
             markLine: {
                 tooltip: {
@@ -472,7 +478,7 @@ var echarts_option = {
     },
 
     CO2_concentration: {
-       title: {
+        title: {
             text: 'CO2浓度',
         },
         tooltip: {
@@ -505,7 +511,7 @@ var echarts_option = {
                         var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>CO2浓度</td>' + '</tr>';
                         for (var i = 0,
-                        l = axisData.length; i < l; i++) {
+                                l = axisData.length; i < l; i++) {
                             table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
@@ -519,7 +525,7 @@ var echarts_option = {
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
                     onclick: function(obj) {
-                            history_data(obj);
+                        history_data(obj);
                     }
                 },
                 restore: {},
@@ -563,13 +569,14 @@ var echarts_option = {
                     }
                 },
                 data: [{
-                    type: 'max',
-                    name: '最大值'
-                },
-                {
-                    type: 'min',
-                    name: '最小值'
-                }]
+                        type: 'max',
+                        name: '最大值'
+                    },
+                    {
+                        type: 'min',
+                        name: '最小值'
+                    }
+                ]
             },
             markLine: {
                 tooltip: {
@@ -587,7 +594,7 @@ var echarts_option = {
     },
 
     pressure: {
-       title: {
+        title: {
             text: '压强',
         },
         tooltip: {
@@ -620,7 +627,7 @@ var echarts_option = {
                         var seriesdata = opt.series[0].data;
                         var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>压强</td>' + '</tr>';
                         for (var i = 0,
-                        l = axisData.length; i < l; i++) {
+                                l = axisData.length; i < l; i++) {
                             table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
                         }
                         //console.log(opt.toolbox[0]);
@@ -634,7 +641,7 @@ var echarts_option = {
                     //icon : '../image/24428451.png',
                     icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
                     onclick: function(obj) {
-                            history_data(obj);
+                        history_data(obj);
                     }
                 },
                 restore: {},
@@ -678,19 +685,135 @@ var echarts_option = {
                     }
                 },
                 data: [{
-                    type: 'max',
-                    name: '最大值'
-                },
-                {
-                    type: 'min',
-                    name: '最小值'
-                }]
+                        type: 'max',
+                        name: '最大值'
+                    },
+                    {
+                        type: 'min',
+                        name: '最小值'
+                    }
+                ]
             },
             markLine: {
                 tooltip: {
                     trigger: 'item',
                     formatter: function(value) {
                         return '压强' + '<br/>' + value.data.name + ': ' + value.data.value + ' Pa'
+                    }
+                },
+                data: [{
+                    type: 'average',
+                    name: '平均值'
+                }]
+            }
+        }]
+    },
+    rainfall: {
+        title: {
+            text: '降雨量',
+        },
+        tooltip: {
+            trigger: 'axis',
+            title: "rainfall",
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#283b56'
+                }
+            }
+        },
+        legend: {
+            data: ['降雨量']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none',
+                },
+                mark: {
+                    show: true
+                },
+                dataView: {
+                    readOnly: true,
+                    optionToContent: function(opt) {
+
+                        var axisData = opt.xAxis[0].data;
+                        var seriesdata = opt.series[0].data;
+                        var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>降雨量</td>' + '</tr>';
+                        for (var i = 0,
+                                l = axisData.length; i < l; i++) {
+                            table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + seriesdata[i] + '</td>' + '</tr>';
+                        }
+                        //console.log(opt.toolbox[0]);
+                        table += '</tbody></table>';
+                        return table;
+                    }
+                },
+                myhistoryData: { //自定义的功能需要以my开头，否则不显示
+                    show: true,
+                    title: '历史数据',
+                    //icon : '../image/24428451.png',
+                    icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
+                    onclick: function(obj) {
+                        history_data(obj);
+                    }
+                },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        dataZoom: {
+            show: false,
+            start: 0,
+            end: 100
+        },
+        xAxis: [{
+            type: 'category',
+            name: '采样时间',
+            boundaryGap: true,
+
+            data: []
+
+        }],
+        yAxis: [{
+            type: 'value',
+            //scale: true,
+            name: '降雨量',
+            //max: 30,
+            //min: 0,
+            boundaryGap: [0.2, 0.2],
+            axisLabel: {
+                formatter: '{value} mm'
+            }
+        }],
+        series: [{
+            name: '降雨量',
+            type: 'line',
+            data: [],
+            markPoint: {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(value) {
+                        console.log(value);
+                        return '降雨量' + '<br/>' + value.data.name + ': ' + value.data.value + ' mm'
+                    }
+                },
+                data: [{
+                        type: 'max',
+                        name: '最大值'
+                    },
+                    {
+                        type: 'min',
+                        name: '最小值'
+                    }
+                ]
+            },
+            markLine: {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function(value) {
+                        return '降雨量' + '<br/>' + value.data.name + ': ' + value.data.value + ' mm'
                     }
                 },
                 data: [{
@@ -706,8 +829,9 @@ var echarts_option = {
 // x 轴数据 series["data"][0] 注意：x轴数据是个时间类型（DATA）
 var line_configs = {
     line_names: [ // 折线图对应的div的id名字
-    "temperature", //这些名字既是div的id，也是echarts_option的key值。
-    "air_humidity", "soil_moisture", "light_intensity", "CO2_concentration", "pressure"],
+        "temperature", //这些名字既是div的id，也是echarts_option的key值。
+        "air_humidity", "soil_moisture", "light_intensity", "CO2_concentration", "pressure", "rainfall"
+    ],
     line_style: "sub_line_div",
     //折线图对应的div的样式
     line_parent_div: "line_parent_div",
@@ -716,5 +840,5 @@ var line_configs = {
     //echarts对象数组，每一个折线图对应一个echarts对象
     my_echarts_value: echarts_option,
     //折线图对应的图表数据
-    line_disable: [] //折线图是否显示（使用）的标志，给定时器请求数据所用
+    line_disable: [] //折线图是否显示（使用）的标志，给定时器请求数据所用(false表示禁用，ture表示可用)
 };

@@ -27,8 +27,16 @@
 
 function history_data(obj) {
 
-    clearInterval(line_timer);
+    //clearInterval(line_timer);
+
     var line_name = obj.option.tooltip[0].title;
+    var line_index = line_configs["line_names"].indexOf(line_name);
+    line_configs["line_disable"][line_index] = false;
+
+    echarts_option[line_name].xAxis[0].data = [];
+    echarts_option[line_name].series[0].data = [];
+    //在显示历史数据前清空实时数据
+
     var webSocketData = {
         "type": "line_chart",
         "line_name": line_name,
@@ -59,6 +67,11 @@ function line_select(obj) //选择显示/不显示折线图
     var line_count = 0;
     var line_index = line_configs["line_names"].indexOf(obj.id.split("-")[0]); //根据复选框的选择确定line_disable[]数组的下标
     if (obj.checked) {
+        //每次选择前清空之前的数据
+        echarts_option[obj.id.split("-")[0]].xAxis[0].data = [];
+        echarts_option[obj.id.split("-")[0]].series[0].data = [];
+
+
         line_configs["line_disable"][line_index] = true; //根据line_disable[]数组的下标来给对应的变量赋值
         $("#" + obj.id.split("-")[0]).show(); //显示对应的div（折线图）
     } else {
@@ -87,12 +100,14 @@ function func2() {
 
 function line_timer_handle() {
     var line_count = 0;
+    var line_real_count = 0;
     var line_name = [];
     // 获取被选中的折线图的名称，发送给目标板
     // line_name[line_count] = 'none',表示此项未选择。line_name[line_count] = 'temperature'，表示温度折线图被选中
     for (line_count = 0; line_count < line_configs["line_disable"].length; line_count++) {
         if (line_configs["line_disable"][line_count]) {
-            line_name[line_count] = line_configs["line_names"][line_count];
+            line_name[line_real_count] = line_configs["line_names"][line_count];
+            line_real_count++;
 
         } else {
             //line_name[line_count] = "none";
@@ -100,6 +115,12 @@ function line_timer_handle() {
         }
     }
 
+    //console.log(echarts_option["temperature"]["toolbox"]);
+    if (line_name.length == 0) {
+        return;
+    }
+    //console.log(line_name.length);
+    //console.log(line_configs["line_disable"][0]);
     var webSocketData = {
         "type": "line_chart",
         "line_name": line_name,
@@ -117,7 +138,7 @@ websocket.onerror = function() {
 };
 websocket.onmessage = function(message) {
 
-   // console.log(message.data);
+    // console.log(message.data);
 
     if (message.data.match("connected")) alert(message.data);
     else {
@@ -169,8 +190,7 @@ websocket.onmessage = function(message) {
                 for (var key in line_data["data"]) {
                     var data0 = echarts_option[key].series[0].data;
                     var data_length = line_data["data"][key].length;
-                    for (var i = 0;
-                    i < data_length; i++) {
+                    for (var i = 0; i < data_length; i++) {
                         data0.push(line_data["data"][key][i][0]);
 
                         var x_date = line_data["data"][key][i][1];

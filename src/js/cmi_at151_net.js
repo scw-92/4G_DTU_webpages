@@ -30,10 +30,10 @@ function net_get(obj) //获取网络信息
     var net_name = obj.id.split("_")[0];
     //alert(net_name);
     var webSocketData = //将要发送给服务器的数据封装成一定的格式
-    {
-        "type": "net_get",
-        "net_name": net_name
-    };
+        {
+            "type": "net_get",
+            "net_name": net_name
+        };
     //alert(JSON.stringify(webSocketData));
     websocket.send(JSON.stringify(webSocketData));
 }
@@ -49,16 +49,16 @@ function static_set(obj) //设置静态IP
     var net_mask = $("#" + net_name + "_mask").val();
     //alert(net_ip+":"+net_mac+":"+net_gate+":"+net_dns);
     var webSocketData = //将要发送给服务器的数据封装成一定的格式
-    {
-        "type": "net_static_set",
-        "net_name": net_name,
-        "net_ip": net_ip,
-        "net_mac": net_mac,
-        "net_gate": net_gate,
-        "net_dns": net_dns,
-        "net_route": net_route,
-        "net_mask": net_mask
-    };
+        {
+            "type": "net_static_set",
+            "net_name": net_name,
+            "net_ip": net_ip,
+            "net_mac": net_mac,
+            "net_gate": net_gate,
+            "net_dns": net_dns,
+            "net_route": net_route,
+            "net_mask": net_mask
+        };
     //alert(JSON.stringify(webSocketData));
     websocket.send(JSON.stringify(webSocketData));
 }
@@ -67,10 +67,10 @@ function dhcpc_set(obj) //使用dhcpc设置IP
 {
     var net_name = obj.id.split("_")[0];
     var webSocketData = //将要发送给服务器的数据封装成一定的格式
-    {
-        "type": "net_dhcpc",
-        "net_name": net_name
-    };
+        {
+            "type": "net_dhcpc",
+            "net_name": net_name
+        };
     //alert(JSON.stringify(webSocketData));
     websocket.send(JSON.stringify(webSocketData));
 }

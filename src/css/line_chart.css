@@ -1,13 +1,20 @@
+.clearfix:after,
+.clearfix:before {
+    content: "";
+    display: table;
+}
 
-.clearfix:after,.clearfix:before{ content: "";display: table;}
-.clearfix:after{ clear:both;}
-.clearfix{zoom:1;}
+.clearfix:after {
+    clear: both;
+}
 
-.sub_line_div{
-    width: 750px;
-    height:450px;
-    float:left;
-    margin-top:10px;
-    margin-left:10px;
-    border:1px solid #000;
-     }
+.clearfix {
+    zoom: 1;
+}
+
+.sub_line_div {
+    width: 850px;
+    height: 550px;
+    margin: 10px auto 0;
+    border: 1px solid #000;
+}

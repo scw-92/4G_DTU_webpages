@@ -1,33 +1,35 @@
-.net_table{
+.net_table {
     width: 600px;
-    margin:auto;
-    align:center;
-    height:150px;
-    valign :middle ;
+    margin: auto;
+    align: center;
+    height: 150px;
+    valign: middle;
 }
 
-.net_table th{
-    text-align:left;
-    font-size:20px;
-    font-weight:bold;
-    
-    
-}
-.net_table  label{
-    display:inline-block;
-    width:75px;
-    margin-top:5px;
+.net_table th {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+
+
 }
 
-.net_table  input{
-    type:text;
-    width:200px;
-    height:25px;
-    font-size:16px;
-    text-align:center;
+.net_table label {
+    display: inline-block;
+    width: 75px;
+    margin-top: 5px;
 }
-.net_table .net_button{
-    width:105px;
-    height:30px;
-    text-align:center;
+
+.net_table input {
+    type: text;
+    width: 200px;
+    height: 25px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.net_table .net_button {
+    width: 105px;
+    height: 30px;
+    text-align: center;
 }

@@ -9,21 +9,21 @@ function uart_send(obj) {
     uart_set();
     //alert(ip_addr);
     webSocketData = //将要发送给服务器的数据封装成一定的格式
-    {
-        "type": "uart_send",
-        "uart_data_send": uart_data_send,
-        "uart_how_to_send": uart_how_to_send,
-        "uart_set_time": parseInt(uart_set_time)
-    };
+        {
+            "type": "uart_send",
+            "uart_data_send": uart_data_send,
+            "uart_how_to_send": uart_how_to_send,
+            "uart_set_time": parseInt(uart_set_time)
+        };
     websocket.send(JSON.stringify(webSocketData));
 
 }
 
 function uart_recv(obj) {
     webSocketData = //将要发送给服务器的数据封装成一定的格式
-    {
-        "type": "uart_read"
-    };
+        {
+            "type": "uart_read"
+        };
     websocket.send(JSON.stringify(webSocketData));
 
 }
@@ -34,23 +34,23 @@ function uart_on_or_off(obj) {
     if (selectedOption.value == "ON") {
         alert("uart_on");
         /*
-				if(obj.options[0].value=="None")
-				{	
-					obj.options[0].value="ON";
-					obj.options[0].innerHTML="ON";
-				}
-				else if(obj.options[1].value=="None")
-				{
-					obj.options[1].value="ON";
-					obj.options[1].innerHTML="ON";
-				}
-				else if(obj.options[2].value=="None")
-				{	
-					obj.options[2].value="ON";
-					obj.options[2].innerHTML="ON";
-				}
-				selectedOption.value="None";
-				selectedOption.innerHTML="None";
+                if(obj.options[0].value=="None")
+                {   
+                    obj.options[0].value="ON";
+                    obj.options[0].innerHTML="ON";
+                }
+                else if(obj.options[1].value=="None")
+                {
+                    obj.options[1].value="ON";
+                    obj.options[1].innerHTML="ON";
+                }
+                else if(obj.options[2].value=="None")
+                {   
+                    obj.options[2].value="ON";
+                    obj.options[2].innerHTML="ON";
+                }
+                selectedOption.value="None";
+                selectedOption.innerHTML="None";
 */
         webSocketData = {
             "type": "uart_on",
@@ -71,28 +71,28 @@ function uart_on_or_off(obj) {
     } else if (selectedOption.value == "OFF") {
         alert("uart_off");
         /*
-				if(obj.options[0].value=="None")
-				{
-					obj.options[0].value="OFF";
-					obj.options[0].innerHTML="OFF";
-				}
-				else if(obj.options[1].value=="None")
-				{
-					obj.options[1].value="OFF";
-					obj.options[1].innerHTML="OFF";
-				}
-				else if(obj.options[2].value=="None")
-				{
-					obj.options[2].value="OFF";
-					obj.options[2].innerHTML="OFF";
-				}
-				selectedOption.value="None";
-				selectedOption.innerHTML="None";
-				*/
+                if(obj.options[0].value=="None")
+                {
+                    obj.options[0].value="OFF";
+                    obj.options[0].innerHTML="OFF";
+                }
+                else if(obj.options[1].value=="None")
+                {
+                    obj.options[1].value="OFF";
+                    obj.options[1].innerHTML="OFF";
+                }
+                else if(obj.options[2].value=="None")
+                {
+                    obj.options[2].value="OFF";
+                    obj.options[2].innerHTML="OFF";
+                }
+                selectedOption.value="None";
+                selectedOption.innerHTML="None";
+                */
         webSocketData = //将要发送给服务器的数据封装成一定的格式
-        {
-            "type": "uart_off"
-        };
+            {
+                "type": "uart_off"
+            };
         websocket.send(JSON.stringify(webSocketData));
     }
 }
@@ -123,7 +123,7 @@ function uart_set() {
     //console.log(uart_data_recv);
     //console.log(uart_data_send);
     //$("#uart_set_time").val('1500');
-    //	$("#uart_recv_date").append("sjdfoisafijsoa");
+    //  $("#uart_recv_date").append("sjdfoisafijsoa");
     //$("#uart_send_date").append("sfhaslkfjskajf;ljdjsafj");
     var uart_on_or_off = $("#UARTOnOff option:selected").text();
     //alert("uart: "+uart_on_or_off);
@@ -143,5 +143,3 @@ websocket.onmessage = function(message) {
     // root = eval("(" + message.data + ")");
     $("#uart_recv_date").append(message.data); //将接收到的数据添加到接收区中
 }
-
-

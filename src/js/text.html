@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <!-- 引入 ECharts 文件 -->
     <script src="echarts.min.js"></script>
 </head>
 
-
 <body>
     <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
     <div id="main" style="width: 700px;height:400px;"></div>
 </body>
 <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
+// 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById('main'));
 
 option = {
     title: {
@@ -30,12 +30,12 @@ option = {
         }
     },
     legend: {
-        data:['最新成交价']
+        data: ['最新成交价']
     },
     toolbox: {
         show: true,
         feature: {
-            dataView: {readOnly: false},
+            dataView: { readOnly: false },
             restore: {},
             saveAsImage: {}
         }
@@ -45,46 +45,39 @@ option = {
         start: 0,
         end: 100
     },
-    xAxis: [
-        {
-            type: 'category',
-            boundaryGap: true,
-            
-            data: []
-            
-        }
-    ],
-    yAxis: [
-        {
-            type: 'value',
-            //scale: true,
-            name: '价格',
-            max: 30,
-            min: 0,
-            boundaryGap: [0.2, 0.2]
-        }
-    ],
-    series: [
-        {
-            name:'最新成交价',
-            type:'line',
-            data:[]
-        }
-    ]
+    xAxis: [{
+        type: 'category',
+        boundaryGap: true,
+
+        data: []
+
+    }],
+    yAxis: [{
+        type: 'value',
+        //scale: true,
+        name: '价格',
+        max: 30,
+        min: 0,
+        boundaryGap: [0.2, 0.2]
+    }],
+    series: [{
+        name: '最新成交价',
+        type: 'line',
+        data: []
+    }]
 };
 //myChart.setOption(option);
 count = 11;
 
-setInterval(function (){
-    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+setInterval(function() {
+    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
 
     var data0 = option.series[0].data;
-    if(data0.length > 9)
-    {
+    if (data0.length > 9) {
         data0.shift();
         option.xAxis[0].data.shift();
-        
-        
+
+
     }
     data0.push(Math.round(Math.random() * 30));
     option.xAxis[0].data.push(axisData);
@@ -95,120 +88,80 @@ setInterval(function (){
 
 
 
-        // 使用刚指定的配置项和数据显示图表。
-        
-    </script>
+// 使用刚指定的配置项和数据显示图表。
+</script>
 
 </html>
-
-
-
-
-
 title: {
-            text: '温度采集',
-        },
-        tooltip: {
-            trigger: 'item',
-            title:"temperature",
-            formatter: function(params) {
-                var date = new Date(params.value[0]);
-                data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                return data + '<br/>' + params.value[1];
+text: '温度采集',
+},
+tooltip: {
+trigger: 'item',
+title:"temperature",
+formatter: function(params) {
+var date = new Date(params.value[0]);
+data = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+return data + '<br />' + params.value[1];
+}
+},
+toolbox: {
+show: true,
+feature: {
+dataZoom: {
+yAxisIndex: 'none',
+},
+mark: {
+show: true
+},
+dataView: {
+show: true,
+title: '数据视图',
+readOnly: true,
+lang: ['数据视图', '关闭', '刷新'],
+optionToContent: function(opt) {
+var axisData = opt.series[0].data;
+var series = opt.series;
+var table = '<table style="width:100%;text-align:center">
+    <tbody>
+        <tr>' + '<td>时间</td>' + '<td>温度</td>' + '</tr>';
+        for (var i = 0,
+        l = axisData.length; i < l; i++) { table +='<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>' ; } //console.log(opt.toolbox[0]); table +='</tbody></table>' ; return table; } }, myhistoryData: { //自定义的功能需要以my开头，否则不显示 show: true, title: '历史数据' , //icon : '../image/24428451.png' , icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28" , onclick: function(obj) { var timer="" ; clearInterval(timer); timer=setInterval(function () { //console.log(obj.option.tooltip[0].title); console.log(obj.option.series[0].data); /* line_configs["my_echarts_obj"][0].appendData( { seriesIndex:0, data:[[new Date(),connt++]] }); */ if(obj.option.series[0].data.length> 4)
+            {
+            obj.option.series[0].data.shift();
             }
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                dataZoom: {
-                    yAxisIndex: 'none',
-                },
-                mark: {
-                    show: true
-                },
-                dataView: {
-                    show: true,
-                    title: '数据视图',
-                    readOnly: true,
-                    lang: ['数据视图', '关闭', '刷新'],
-                    optionToContent: function(opt) {
-
-                        var axisData = opt.series[0].data;
-                        var series = opt.series;
-                        var table = '<table style="width:100%;text-align:center"><tbody><tr>' + '<td>时间</td>' + '<td>温度</td>' + '</tr>';
-                        for (var i = 0,
-                        l = axisData.length; i < l; i++) {
-                            table += '<tr>' + '<td>' + axisData[i][0] + '</td>' + '<td>' + axisData[i][1] + '</td>' + '</tr>';
-                        }
-                        //console.log(opt.toolbox[0]);
-                        table += '</tbody></table>';
-                        return table;
-                    }
-                },
-                myhistoryData: { //自定义的功能需要以my开头，否则不显示
-                    show: true,
-                    title: '历史数据',
-                    //icon : '../image/24428451.png',
-                    icon: " M11.5,2v56H51V14.8L38.4,2.2v12.7H51 M45.4,41.28",
-                    onclick: function(obj) {
-
-                        var timer = "";
-                       clearInterval(timer);
-                       timer =  setInterval(function ()
-                        {
-                            //console.log(obj.option.tooltip[0].title);
-                            console.log(obj.option.series[0].data);
-                            /*
-                            line_configs["my_echarts_obj"][0].appendData(
-                            {
-                                seriesIndex:0,
-                                data:[[new Date(),connt++]]
-                            });
-                            */
-                            
-                            if(obj.option.series[0].data.length > 4)
-                            {
-                                obj.option.series[0].data.shift();
-                                
-                            }
-                            obj.option.series[0].data.push([new Date(),connt++]);
-                            
-                            line_configs["my_echarts_obj"][0].setOption(line_configs["my_echarts_obj"][0].getOption());
-                            
-                        },2000);
-                        
-                    }
-                },
-
-                saveAsImage: {
-                    show: true
-                },
-                restore: {
-                    show: true
-                }
+            obj.option.series[0].data.push([new Date(),connt++]);
+            line_configs["my_echarts_obj"][0].setOption(line_configs["my_echarts_obj"][0].getOption());
+            },2000);
             }
-        },
-
-        legend: {
+            },
+            saveAsImage: {
+            show: true
+            },
+            restore: {
+            show: true
+            }
+            }
+            },
+            legend: {
             data: ['温度采集']
-        },
-        grid: {
+            },
+            grid: {
             y2: 80
-        },
-        xAxis: [{
+            },
+            xAxis: [{
             type: 'time',
             splitNumber: 5,
             scale: true,
             data:[]
-        }],
-        yAxis: [{
+            }],
+            yAxis: [{
             type: 'value',
             //scale: true,
             axisLabel: {
-                formatter: '{value} °C'
+            formatter: '{value} °C'
             }
-        }],
-        series: [{
+            }],
+            series: [{
             name: '温度采集',
             type: 'line',
             symbol:"circle",
@@ -216,36 +169,35 @@ title: {
             symbolSize: 4,
             data: [],
             markPoint: {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: function(value)
-                    {
-                        console.log(value);
-                        return '温度采集' + '<br/>' + value.data.name +': ' + value.data.value + ' °C'
-                    }
-                },
-                data: [{
-                    type: 'max',
-                    name: '最大值'
-                },
-                {
-                    type: 'min',
-                    name: '最小值'
-                }]
+            tooltip: {
+            trigger: 'item',
+            formatter: function(value)
+            {
+            console.log(value);
+            return '温度采集' + '<br />' + value.data.name +': ' + value.data.value + ' °C'
+            }
+            },
+            data: [{
+            type: 'max',
+            name: '最大值'
+            },
+            {
+            type: 'min',
+            name: '最小值'
+            }]
             },
             markLine: {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: function(value)
-                    {
-                        return '温度采集' + '<br/>' + value.data.name +': ' + value.data.value + ' °C'
-                    }
-                },
-                data: [{
-                    type: 'average',
-                    name: '平均值'
-                }]
+            tooltip: {
+            trigger: 'item',
+            formatter: function(value)
+            {
+            return '温度采集' + '<br />' + value.data.name +': ' + value.data.value + ' °C'
             }
-        }]
-
-    },
+            },
+            data: [{
+            type: 'average',
+            name: '平均值'
+            }]
+            }
+            }]
+            },
