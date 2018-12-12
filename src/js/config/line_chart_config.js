@@ -3,7 +3,7 @@ var ip_addr = document.location.hostname; //客服端要访问的主机IP地址�
 window.WebSocket = window.WebSocket || window.MozWebSocket;
 //var websocket = new WebSocket('ws://' + '192.168.4.250' +':9988',
 //var websocket = new WebSocket('ws://' + ip_addr +':9988',
-var websocket = new WebSocket('ws://' + '192.168.4.101' + ':9001');
+var websocket = new WebSocket('ws://' + ip_addr + ':9001');
 
 
 

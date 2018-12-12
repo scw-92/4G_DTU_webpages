@@ -23,40 +23,51 @@
     <title>Update</title>
 </head>
 
+<style>
+    .input_button{
+        width:140px;
+    }
+    
+    .td_button{
+        align:center;
+        cellpadding:20px;
+    }
+    
+</style>
 <body>
     <div class="page-container">
         <p class="f-20 text-success">Status <span class="f-14">v0.1</span></p>
         <table class="table table-border table-bordered table-bg mt-20">
             <thead>
                 <tr>
-                    <th colspan="2" scope="col">CMI_AT151 4G DTU Upgrede</th>
+                    <th colspan="3" scope="col">CMI_AT151 4G DTU Upgrede</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td width="33%"> <input type="file" name="MLO_select_name" id="MLO_select_id" value="MLO" onchange="MLO_select_fun()"> </td>
                     <td width="33%" id="MLO_percent">0%</td>
-                    <td width="33%"> <input type="button" onclick="MLO_upgrade_fun()" value="MLO_upgrade"></td>
+                    <td width="33%" class="td_button"> <input  type="button" onclick="MLO_upgrade_fun()" class="btn pink input_button" value="MLO_upgrade"></td>
                 </tr>
                 <tr>
                     <td width="33%"> <input type="file" name="uboot_select_name" id="uboot_select_id" value="u-boot.img" onchange="uboot_select_fun()"> </td>
                     <td width="33%" id="uboot_percent">0%</td>
-                    <td width="33%"> <input type="button" onclick="uboot_upgrade_fun()" value="uboot_upgrade"></td>
+                    <td width="33%" class="td_button"> <input type="button"  onclick="uboot_upgrade_fun()" class="btn pink input_button" value="uboot_upgrade"></td>
                 </tr>
                 <tr>
                     <td width="33%"> <input type="file" name="zImage_select_name" id="zImage_select_id" value="zImage" onchange="zImage_select_fun()"> </td>
                     <td width="33%" id="zImage_percent">0%</td>
-                    <td width="33%"> <input type="button" onclick="zImage_upgrade_fun()" value="zImage_upgrade"></td>
+                    <td width="33%" class="td_button"> <input type="button"  onclick="zImage_upgrade_fun()" class="btn pink input_button" value="zImage_upgrade"></td>
                 </tr>
                 <tr>
                     <td width="33%"> <input type="file" name="dtb_select_name" id="dtb_select_id" value="am335x_cmi_at151.dtb" onchange="dtb_select_fun()"> </td>
                     <td width="33%" id="dtb_percent">0%</td>
-                    <td width="33%"> <input type="button" onclick="dtb_upgrade_fun()" value="dtb_upgrade"></td>
+                    <td width="33%" class="td_button"> <input type="button"   onclick="dtb_upgrade_fun()" class="btn pink input_button" value="dtb_upgrade"></td>
                 </tr>
                 <tr>
                     <td width="33%"> <input type="file" name="opt_select_name" id="opt_select_id" value="opt.img" onchange="opt_select_fun()"> </td>
                     <td width="33%" id="opt_percent">0%</td>
-                    <td width="33%"> <input type="button" onclick="opt_upgrade_fun()" value="opt_upgrade"></td>
+                    <td width="33%" class="td_button"  > <input type="button"  onclick="opt_upgrade_fun()" class="btn pink input_button" value="opt_upgrade"></td>
                 </tr>
             </tbody>
         </table>

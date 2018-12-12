@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="whitelist_ip" class="firewall_label">IP: </label> <input id="whitelist" />
+                            <label for="whitelist_ip" class="firewall_label">IP: </label> <input id="whitelist_ip" />
                         </td>
                         <td>
                             <label for="whitelist_ip_out"> Data Direction: </label>
@@ -96,7 +96,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="blacklist_ip" class="firewall_label">IP: </label> <input id="blacklist" />
+                            <label for="blacklist_ip" class="firewall_label">IP: </label> <input id="blacklist_ip" />
                         </td>
                         <td>
                             <label for="blacklist_ip_out"> Data Direction: </label>
@@ -141,10 +141,10 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input type="button" name="" value="提交" class="input-button btn pink" id="firewallmessage_button_submit" onclick="javascript:firewall_button(this)">
+                            <input type="button" name="" value="get" class="input-button btn pink" id="firewallmessage_button_submit" onclick="javascript:firewall_button(this)">
                         </td>
                         <td>
-                            <input type="button" name="" value="重置" class="input-button btn pink" id="firewallmessage_button_reset" onclick="javascript:firewall_button(this)">
+                            <input type="button" name="" value="clean" class="input-button btn pink" id="firewallmessage_button_reset" onclick="javascript:firewall_button_clean(this)">
                         </td>
                     </tr>
                 </tbody>

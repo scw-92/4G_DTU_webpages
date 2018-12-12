@@ -5,7 +5,7 @@ window.WebSocket = window.WebSocket || window.MozWebSocket;
 //var websocket = new WebSocket('ws://' + ip_addr +':9988',
 //                           'dumb-increment-protocol');
 
-var websocket = new WebSocket('ws://' + '192.168.4.101' + ':9001');
+var websocket = new WebSocket('ws://' + ip_addr + ':9001');
 
 function ethx_select(obj) //复选框选择
 {
