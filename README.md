@@ -182,3 +182,39 @@
  
    3. 关于时间采用的问题，目前默认采用前端机器的时间，数据中的date只是预留的接口，其前端功能暂未实现
 ```
+
+# 防火墙设置
+## 白名单数据发送格式
+```sh
+  data_condig = 
+  {
+    'type': 'firewall', 
+    'opt_type': 'whitelist', 
+    'value': ['192.168.4.1', '9901'],
+    'protocol': ['tcp', 'udp'], 
+    'ip': ['out', 'in'], 
+    'port': ['out', 'in']
+  }
+```
+
+## 黑名单数据发送格式
+```sh
+  data_condig = 
+  {
+    'type': 'firewall', 
+    'opt_type': 'blacklist', 
+    'value': ['192.168.4.1', '9901'],
+    'protocol': ['tcp', 'udp'], 
+    'ip': ['out', 'in'], 
+    'port': ['out', 'in']
+  }
+```
+
+## 防火墙信息（get）数据发送格式
+```sh
+  data_condig = 
+  {
+    'opt_type': 'firewallmessage', 
+    'type': 'firewall'
+  }
+```
