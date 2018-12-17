@@ -44,7 +44,7 @@
             <input type="checkbox" name="firewall" value="fire-message" id="firewallmessage" onclick="javascript:firewall_select(this)" /> fire-message &nbsp;&nbsp;&nbsp;&nbsp;
             <br /> <br />
         </p>
-        <form id="whitelist_form" hidden>
+        <form id="whitelist_form"  target="firewall_iframe" hidden >
             <table class="firewall_table" id="whitelist_table">
                 <tbody>
                     <tr>
@@ -52,7 +52,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="whitelist_ip" class="firewall_label">IP: </label> <input id="whitelist_ip" />
+                            <label for="whitelist_ip" class="firewall_label">IP: </label> <input list="browsers_whitelist" name="browser" id="whitelist_ip">
+                            <datalist id="browsers_whitelist">
+                                <option value="192.168.0.1">
+                                <option value="192.168.1.2">
+                                <option value="192.168.2.3">
+                                <option value="192.168.3.4">
+                                <option value="192.168.4.5">
+                            </datalist>
                         </td>
                         <td>
                             <label for="whitelist_ip_out"> Data Direction: </label>
@@ -62,7 +69,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="whitelist_port" class="firewall_label">Port: </label> <input id="whitelist_port" />
+                            <label for="whitelist_port" class="firewall_label">Port: </label> <input type="number" id="whitelist_port" />
                         </td>
                         <td>
                             <label for="whitelist_port_out"> Data Direction: </label>
@@ -79,7 +86,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" name="" value="提交" class="input-button btn pink" id="whitelist_button" onclick="javascript:firewall_button(this)">
+                            <input type="submit" value="提交" class="input-button btn pink" id="whitelist_button" onclick="javascript:firewall_button(this)" >
                         </td>
                         <td>
                             <input type="reset" name="" value="重置" class="input-button btn pink">
@@ -88,7 +95,8 @@
                 </tbody>
             </table>
         </form>
-        <form id="blacklist_form" hidden>
+        <iframe  name="firewall_iframe" style="display:none;"></iframe>
+        <form id="blacklist_form" hidden target="firewall_iframe">
             <table class="firewall_table" id="blacklist_table">
                 <tbody>
                     <tr>
@@ -96,7 +104,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="blacklist_ip" class="firewall_label">IP: </label> <input id="blacklist_ip" />
+                            <label for="blacklist_ip" class="firewall_label">IP: </label> <input list="browsers_blacklist" name="browser" id="blacklist_ip">
+                            <datalist id="browsers_blacklist">
+                                <option value="192.168.0.1">
+                                <option value="192.168.1.2">
+                                <option value="192.168.2.3">
+                                <option value="192.168.3.4">
+                                <option value="192.168.4.5">
+                            </datalist>
                         </td>
                         <td>
                             <label for="blacklist_ip_out"> Data Direction: </label>
@@ -106,7 +121,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="blacklist_port" class="firewall_label">Port: </label> <input id="blacklist_port" />
+                            <label for="blacklist_port" class="firewall_label">Port: </label> <input id="blacklist_port" type="number" />
                         </td>
                         <td>
                             <label for="blacklist_port_out"> Data Direction: </label>
@@ -123,7 +138,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" name="" value="提交" class="input-button btn pink" id="blacklist_button" onclick="javascript:firewall_button(this)">
+                            <input type="submit" name="" value="提交" class="input-button btn pink" id="blacklist_button" onclick="javascript:firewall_button(this)">
                         </td>
                         <td>
                             <input type="reset" name="" value="重置" class="btn pink input-button">
@@ -132,7 +147,7 @@
                 </tbody>
             </table>
         </form>
-        <form id="firewallmessage_form" hidden>
+        <form id="firewallmessage_form" hidden >
             <div class="input-group input-group-lg">
                 <span class="input-group-addon">FireWall Message</span>
                 <div contenteditable="true" id="firewallmessage-div" data-spy="scroll" data-offset="200px" style="height:200px;overflow:auto;text-indent: 2em;padding-top:15px;padding-left:15px;text-overflow: ellipsis; word-break: break-all;text-shadow: 2px 2px #f2e78d; position: relative;border:1px solid #000 "></div>
