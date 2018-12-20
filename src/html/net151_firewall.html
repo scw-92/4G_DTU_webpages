@@ -62,9 +62,9 @@
                             </datalist>
                         </td>
                         <td>
-                            <label for="whitelist_ip_out"> Data Direction: </label>
-                            <input type="checkbox" name="whitelist_ip_direc" value="whitelist" id="whitelist_ip_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="checkbox" name="whitelist_ip_direc" value="whitelist" id="whitelist_ip_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="whitelist_ip_output"> Data Direction: </label>
+                            <input type="checkbox" name="whitelist_ip_direc" value="whitelist" id="whitelist_ip_output" onclick="javascript:data_direc_select(this)" checked="true" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_ip_direc" value="whitelist" id="whitelist_ip_input" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -72,16 +72,25 @@
                             <label for="whitelist_port" class="firewall_label">Port: </label> <input type="number" id="whitelist_port" />
                         </td>
                         <td>
-                            <label for="whitelist_port_out"> Data Direction: </label>
-                            <input type="checkbox" name="whitelist_port_direc" value="whitelist" id="whitelist_port_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="checkbox" name="whitelist_port_direc" value="whitelist" id="whitelist_port_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="whitelist_port_output"> Data Direction: </label>
+                            <input type="checkbox" name="whitelist_port_direc" value="whitelist" id="whitelist_port_output" onclick="javascript:data_direc_select(this)" checked="true" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_port_direc" value="whitelist" id="whitelist_port_input" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        
+                        <td >
                             <label for="whitelist_protocol_tcp"> Protocol: </label>
-                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_tcp" onclick="javascript:data_direc_select(this)" /> tcp &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_udp" onclick="javascript:data_direc_select(this)" /> udp &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_tcp" checked="true" onchange="javascript:data_direc_show(this)" /> tcp &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_udp" checked="true"  onchange="javascript:data_direc_show(this)" /> udp &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td >
+                            <div id="whitelist_protocol_div">
+                            <label for="whitelist_protocol_output"> Data Direction: </label>
+                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_output" checked="true"  /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="whitelist_protocol" value="whitelist" id="whitelist_protocol_input"  
+                             /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
                         </td>
                     </tr>
                     <tr>
@@ -114,9 +123,9 @@
                             </datalist>
                         </td>
                         <td>
-                            <label for="blacklist_ip_out"> Data Direction: </label>
-                            <input type="checkbox" name="blacklist_ip_direc" value="blacklist" id="blacklist_ip_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="checkbox" name="blacklist_ip_direc" value="blacklist" id="blacklist_ip_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="blacklist_ip_output"> Data Direction: </label>
+                            <input type="checkbox" name="blacklist_ip_direc" value="blacklist" id="blacklist_ip_output" onclick="javascript:data_direc_select(this)" checked="true" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="blacklist_ip_direc" value="blacklist" id="blacklist_ip_input" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
                     <tr>
@@ -124,20 +133,30 @@
                             <label for="blacklist_port" class="firewall_label">Port: </label> <input id="blacklist_port" type="number" />
                         </td>
                         <td>
-                            <label for="blacklist_port_out"> Data Direction: </label>
-                            <input type="checkbox" name="blacklist_port_direc" value="blacklist" id="blacklist_port_out" onclick="javascript:data_direc_select(this)" /> out &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="checkbox" name="blacklist_port_direc" value="blacklist" id="blacklist_port_in" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label for="blacklist_port_output"> Data Direction: </label>
+                            <input type="checkbox" name="blacklist_port_direc" value="blacklist" id="blacklist_port_output" onclick="javascript:data_direc_select(this)" checked="true"/> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="blacklist_port_direc" value="blacklist" id="blacklist_port_input" onclick="javascript:data_direc_select(this)" /> in &nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <label for="blacklist_protocol_tcp"> Protocol: </label>
-                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_tcp" onclick="javascript:data_direc_select(this)" /> tcp &nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_udp" onclick="javascript:data_direc_select(this)" /> udp &nbsp;&nbsp;&nbsp;&nbsp;
+                        <td >
+                            <label for="blacklist_protocol_tcp"> protocol: </label>
+                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_tcp"checked="true" onchange="javascript:data_direc_show(this)" /> tcp &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_udp" checked="true" onchange="javascript:data_direc_show(this)" /> udp &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td >
+                            <div id="blacklist_protocol_div">
+                            <label for="blacklist_protocol_output"> Data Direction: </label>
+                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_output" checked="true" /> out &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="checkbox" name="blacklist_protocol" value="blacklist" id="blacklist_protocol_input"  /> in &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
+
+
+
                             <input type="submit" name="" value="提交" class="input-button btn pink" id="blacklist_button" onclick="javascript:firewall_button(this)">
                         </td>
                         <td>
