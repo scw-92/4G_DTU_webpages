@@ -83,7 +83,8 @@ function line_select(obj) //选择显示/不显示折线图
     clearInterval(line_timer);
     for (line_count = 0; line_count < line_configs["line_disable"].length; line_count++) {
         if (line_configs["line_disable"][line_count]) {
-            line_timer = setInterval(line_timer_handle, 3000);
+            var line_times = $("#" + "line_time");
+            line_timer = setInterval(line_timer_handle, line_times.val() * 1000);
             return;
         }
 

@@ -32,11 +32,14 @@
     <nav class="breadcrumb">
         <i class="Hui-iconfont"></i> 首页
         <span class="c-gray en">&gt;</span> 数据图
+        
         <span class="c-gray en">&gt;</span> 数据图设置
         <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont"></i></a>
     </nav>
     <div class="page-container">
         <p class="f-20 text-success">Status <span class="f-14">v0.1</span></p>
+        <p class="f-20 text-success"><label for="line_time" >采样间隔（s）: </label> <input type="number" id="line_time" min="1" value="3" /></span></p>
+        
         <p>
             <label>Line Chart Setup:</label>&nbsp;&nbsp; <input type="checkbox" name="line_chart_select" value="temperature" id="temperature-input" onclick="javascript:line_select(this)" /> 温度 &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="checkbox" name="line_chart_select" value="air_humidity" id="air_humidity-input" onclick="javascript:line_select(this)" /> 空气湿度 &nbsp;&nbsp;&nbsp;&nbsp;

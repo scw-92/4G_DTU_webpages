@@ -75,7 +75,7 @@ var echarts_option = {
         },
         xAxis: [{
             type: 'category',
-            name: '采样时间',
+            name: '时间',
             boundaryGap: true,
 
             data: []
@@ -84,12 +84,12 @@ var echarts_option = {
         yAxis: [{
             type: 'value',
             //scale: true,
-            name: '温度',
+            name: '温度（°C）',
             //max: 30,
             //min: 0,
             boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} °C'
+                formatter: '{value}'
             }
         }],
         series: [{
@@ -191,7 +191,7 @@ var echarts_option = {
         },
         xAxis: [{
             type: 'category',
-            name: '采样时间',
+            name: '时间',
             boundaryGap: true,
 
             data: []
@@ -200,12 +200,12 @@ var echarts_option = {
         yAxis: [{
             type: 'value',
             //scale: true,
-            name: '空气湿度',
+            name: '空气湿度（%）',
             max: 100,
             min: 0,
             boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} %'
+                formatter: '{value}'
             }
         }],
         series: [{
@@ -307,7 +307,7 @@ var echarts_option = {
         },
         xAxis: [{
             type: 'category',
-            name: '采样时间',
+            name: '时间',
             boundaryGap: true,
 
             data: []
@@ -316,12 +316,12 @@ var echarts_option = {
         yAxis: [{
             type: 'value',
             //scale: true,
-            name: '土壤湿度',
+            name: '土壤湿度（%RH）',
             max: 100,
             min: 0,
             boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} %'
+                formatter: '{value}'
             }
         }],
         series: [{
@@ -333,7 +333,7 @@ var echarts_option = {
                     trigger: 'item',
                     formatter: function(value) {
                         console.log(value);
-                        return '土壤湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %'
+                        return '土壤湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %RH'
                     }
                 },
                 data: [{
@@ -350,7 +350,7 @@ var echarts_option = {
                 tooltip: {
                     trigger: 'item',
                     formatter: function(value) {
-                        return '土壤湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %'
+                        return '土壤湿度' + '<br/>' + value.data.name + ': ' + value.data.value + ' %RH'
                     }
                 },
                 data: [{
@@ -423,7 +423,7 @@ var echarts_option = {
         },
         xAxis: [{
             type: 'category',
-            name: '采样时间',
+            name: '时间',
             boundaryGap: true,
 
             data: []
@@ -432,12 +432,12 @@ var echarts_option = {
         yAxis: [{
             type: 'value',
             //scale: true,
-            name: '光照强度',
+            name: '光照强度 (Lux)',
             //max: 30,
             //min: 0,
             boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} CD'
+                formatter: '{value}'
             }
         }],
         series: [{
@@ -449,7 +449,7 @@ var echarts_option = {
                     trigger: 'item',
                     formatter: function(value) {
                         console.log(value);
-                        return '光照强度' + '<br/>' + value.data.name + ': ' + value.data.value + ' CD²'
+                        return '光照强度' + '<br/>' + value.data.name + ': ' + value.data.value + ' Lux'
                     }
                 },
                 data: [{
@@ -466,7 +466,7 @@ var echarts_option = {
                 tooltip: {
                     trigger: 'item',
                     formatter: function(value) {
-                        return '光照强度' + '<br/>' + value.data.name + ': ' + value.data.value + ' CD'
+                        return '光照强度' + '<br/>' + value.data.name + ': ' + value.data.value + ' Lux'
                     }
                 },
                 data: [{
@@ -539,7 +539,7 @@ var echarts_option = {
         },
         xAxis: [{
             type: 'category',
-            name: '采样时间',
+            name: '时间',
             boundaryGap: true,
 
             data: []
@@ -548,12 +548,12 @@ var echarts_option = {
         yAxis: [{
             type: 'value',
             //scale: true,
-            name: 'CO2浓度',
+            name: 'CO2浓度 (ppm)',
             //max: 30,
             //min: 0,
             boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} ppm'
+                formatter: '{value}'
             }
         }],
         series: [{
@@ -655,7 +655,7 @@ var echarts_option = {
         },
         xAxis: [{
             type: 'category',
-            name: '采样时间',
+            name: '时间',
             boundaryGap: true,
 
             data: []
@@ -664,12 +664,12 @@ var echarts_option = {
         yAxis: [{
             type: 'value',
             //scale: true,
-            name: '压强',
+            name: '压强 (Pa)',
             //max: 30,
             //min: 0,
             boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} Pa'
+                formatter: '{value}'
             }
         }],
         series: [{
@@ -770,7 +770,7 @@ var echarts_option = {
         },
         xAxis: [{
             type: 'category',
-            name: '采样时间',
+            name: '时间',
             boundaryGap: true,
 
             data: []
@@ -779,12 +779,12 @@ var echarts_option = {
         yAxis: [{
             type: 'value',
             //scale: true,
-            name: '降雨量',
+            name: '降雨量 (mm)',
             //max: 30,
             //min: 0,
             boundaryGap: [0.2, 0.2],
             axisLabel: {
-                formatter: '{value} mm'
+                formatter: '{value}'
             }
         }],
         series: [{
